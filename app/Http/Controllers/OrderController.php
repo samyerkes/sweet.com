@@ -29,7 +29,7 @@ class OrderController extends Controller
      */
     public function pending()
     {
-        $orders = Order::all()->where('status_id', 1);
+        $orders = Order::all()->where('status_id', 2);
         return view('orders.pending', ['orders' => $orders]);
     }
 
@@ -40,7 +40,7 @@ class OrderController extends Controller
      */
     public function completed()
     {
-        $orders = Order::all()->where('status_id', 2);
+        $orders = Order::all()->where('status_id', 3);
         return view('orders.completed', ['orders' => $orders]);
     }
 

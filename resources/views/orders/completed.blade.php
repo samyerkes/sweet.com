@@ -20,6 +20,8 @@
 					<td>{{ $order->dateOrdered }}</td>
 					<td>
 						@if ( $order->status_id == 1)
+							<span class="glyphicon glyphicon-shopping-cart"></span>
+						@elseif ( $order->status_id == 2)
 							<span class="glyphicon glyphicon-remove"></span>
 						@else
 							<span class="glyphicon glyphicon-ok"></span>

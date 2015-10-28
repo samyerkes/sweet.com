@@ -2,13 +2,13 @@
 
 @section('content')
 	
-	@if ($order->status->id == 1)
+	@if ($order->status->id == 2)
 		<div class="progress">
 			<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
 			<span class="sr-only">40% In Progress</span>
 			</div>
 		</div>
-	@else
+	@elseif ($order->status->id == 3)
 		<div class="progress">
 			<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 			<span class="sr-only">100% Complete</span>
@@ -17,10 +17,12 @@
 	@endif
 	
 
-	@if ($order->status->id == 1)
+	@if ($order->status->id == 2)
 		<div class="panel panel-warning">
-	@else
+	@elseif ($order->status->id == 3)
 		<div class="panel panel-success">
+	@else 
+		<div class="panel panel-default">
 	@endif
 		<div class="panel-heading">
 			Order #{{ $order->id }}

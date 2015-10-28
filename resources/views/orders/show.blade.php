@@ -2,10 +2,12 @@
 
 @section('content')
 
-	@if ($order->status->id == 1)
+	@if ($order->status->id == 2)
 		<div class="panel panel-warning">
-	@else
+	@elseif ($order->status->id == 3)
 		<div class="panel panel-success">
+	@else 
+		<div class="panel panel-default">
 	@endif
 		<div class="panel-heading">
 			Order #{{ $order->id }}
