@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-6">
             <div class="thumbnail">
-            	<img src="http://naturalrevolution.org/wp-content/uploads/2015/02/chocolate.jpg" alt="{{ $product->name }}">
+            	<img src="/uploads/images/products/product-{{$product->id}}.jpg" alt="{{ $product->name }}">
             </div>
         </div>
         <div class="col-md-6">
@@ -26,7 +26,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p>{{ $product->description }}</p>	
+			<p>{!! $product->description !!}</p>
 		</div>
 	</div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -71,6 +72,13 @@ class ProductController extends Controller
         $product->inventory = $request->Quantity;
         $product->save();
 
+        $extension = $request->file('Image')->getClientOriginalExtension();
+        $imageName = 'product-' .$product->id . '.' . $extension;
+
+        $request->file('Image')->move(
+            base_path() . '/public/uploads/images/products/', $imageName
+        );
+
         $request->session()->flash('status', 'Product was added.');
 
         $products = Product::all();
@@ -119,6 +127,13 @@ class ProductController extends Controller
         $product->description = $request->Description;
         $product->inventory = $request->Quantity;
         $product->save();
+
+        $extension = $request->file('Image')->getClientOriginalExtension();
+        $imageName = 'product-' .$product->id . '.' . $extension;
+
+        $request->file('Image')->move(
+            base_path() . '/public/uploads/images/products/', $imageName
+        );
 
         $request->session()->flash('status', 'Product was successfully updated.');
 

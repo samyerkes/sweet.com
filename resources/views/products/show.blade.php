@@ -11,7 +11,7 @@
 		</div>
 		<div class="panel-body">
 			<strong>Price:</strong> ${{ $product->price }} per unit<br />
-			<p>{{ $product->description }}</p>
+			<p>{!! $product->description !!}</p>
 	    </div>
 	</div>
 	

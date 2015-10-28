@@ -3,7 +3,7 @@
 @section('content')
 	<h1>Add Product</h1>
 
-    {!! Form::open(array('action' => 'ProductController@store')) !!}
+    {!! Form::open(array('action' => 'ProductController@store', 'id'=>'myform', 'files' => true)) !!}
 		<div class="form-group">
     		{!! Form::label('Name', 'Name'); !!}
     		{!! Form::text('Name', null, array('class' => 'form-control', 'placeholder'=>'Name')); !!}
@@ -15,8 +15,15 @@
 		</div>
 
 		<div class="form-group">
-    		{!! Form::label('Description', 'Description'); !!}
-    		{!! Form::text('Description', null, array('class' => 'form-control', 'placeholder'=>'Description')); !!}
+			{!! Form::label('Description', 'Description'); !!}
+			@include('partials.quill-open')
+			@include('partials.quill-close')
+			{!! Form::hidden('Description', 'Description', array('id' => 'quill')) !!}
+		</div>
+
+		<div class="form-group">
+			{!! Form::label('Image', 'Image'); !!}
+			{!! Form::file('Image') !!}
 		</div>
 
 	    <div class="form-group">
@@ -27,4 +34,8 @@
     	{!! Form::submit('Submit', array('class'=>'btn btn-primary')); !!}
 	{!! Form::close() !!}
 
+@endsection
+
+@section('sidebar')
+    @include('sidebar.admin')
 @endsection

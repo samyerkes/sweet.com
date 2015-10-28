@@ -3,7 +3,7 @@
 @section('content')
 	<h1>Edit Product</h1>
 
-    {!! Form::open(array('action' => 'ProductController@update', $product->id, 'method' => 'PUT')) !!}
+    {!! Form::open(array('action' => 'ProductController@update', $product->id, 'method' => 'PUT', 'id'=>'myform', 'files' => true)) !!}
 
     		{!! Form::hidden('id', $product->id) !!}
 
@@ -19,7 +19,15 @@
 
 			<div class="form-group">
 	    		{!! Form::label('Description', 'Description'); !!}
-	    		{!! Form::text('Description', $product->description, array('class' => 'form-control', 'placeholder'=>'Description')); !!}
+				@include('partials.quill-open')
+					{!! $product->description !!}
+				@include('partials.quill-close')
+				{!! Form::hidden('Description', 'Description', array('id' => 'quill')) !!}
+			</div>
+
+			<div class="form-group">
+				{!! Form::label('Image', 'Image'); !!}
+				{!! Form::file('Image') !!}
 			</div>
 
 		    <div class="form-group">
