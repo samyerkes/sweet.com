@@ -12,7 +12,7 @@
         	<h3>{{ $product->name }}</h3>
 			<p>${{ $product->price }} per unit</p>
 			
-			{!! Form::open(array('action' => 'OrderController@store')) !!}
+			{!! Form::open(array('action' => 'CartController@store')) !!}
 				{!! Form::hidden('product_id', $product->id) !!}
 
 				<div class="form-group">

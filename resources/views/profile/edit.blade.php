@@ -32,7 +32,7 @@
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<label for="address">Default Address:</label>	
+				<label for="address">Default Addresses:</label>
 			</div>
 			
 			<div class="form-group">

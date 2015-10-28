@@ -52,4 +52,12 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Order');
     }
+
+    /**
+     * Get the users address
+     */
+    public function address()
+    {
+        return $this->hasMany('App\Address');
+    }
 }

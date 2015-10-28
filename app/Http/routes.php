@@ -36,6 +36,8 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function () {
 
+	Route::resource('cart', 'CartController');
+	Route::resource('profile/address', 'AddressController');
 	Route::resource('profile', 'ProfileController');
 	Route::group(['middleware' => 'UserInfo'], function() {
 	    Route::resource('profile', 'ProfileController', ['only' => ['edit']]);
@@ -43,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['middleware' => 'OrderUser'], function() {
 	    Route::resource('profile', 'ProfileController', ['only' => ['show']]);
 	});
+	
 
 	Route::group(['middleware' => 'admin'], function() {
 		Route::get('/admin', ['as' => 'admin', function () {

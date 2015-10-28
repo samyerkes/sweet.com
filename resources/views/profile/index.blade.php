@@ -14,6 +14,32 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
+            {{ $user->fname }}'s default addresses <a href="{{ route('profile.address.index') }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+        </div>
+        
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+            </thead>
+            @foreach($addresses as $addr)
+                <tr>
+                    <td>{{ $addr->name }}</td>
+                    <td>{{ $addr->street }}</td>
+                    <td>{{ $addr->city }}</td>
+                    <td>{{ $addr->state }}</td>
+                    <td>{{ $addr->zip }}</td>
+                </tr>
+            @endforeach
+        </table>
+        
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
             {{ $user->fname }}'s orders
         </div>
         <table class="table table-striped">
@@ -32,7 +58,7 @@
                         @elseif ( $order->status_id == 3)
                             <span class="glyphicon glyphicon-ok"></span>
                         @else
-                            <span class="glyphicon glyphicon-remove"></span>
+                            <span class="glyphicon glyphicon-arrow-right"></span>
                         @endif
                     </td>
                 </tr>

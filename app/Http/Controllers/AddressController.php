@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Order;
-use App\Status;
 use App\Address;
 use Auth;
+use Redirect;
 
-class ProfileController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +20,8 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $orders = User::find($user->id)->order;
         $addresses = User::find($user->id)->address;
-
-        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses]);
+        return view('address.index', ['user' => $user, 'addresses'=>$addresses]);
     }
 
     /**
@@ -34,7 +31,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        // not needed cause we have auth 
+        return view('address.create');
     }
 
     /**
@@ -45,7 +42,19 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // not needed cause we have auth
+        $user = Auth::user();
+        $address = new Address;
+        $address->user_id = $user->id;
+        $address->name = $request->name;
+        $address->street = $request->street;
+        $address->city = $request->city;
+        $address->state = $request->state;
+        $address->zip = $request->zip;
+        $address->save();
+
+        $request->session()->flash('status', 'Address information was successfully saved.');
+
+        return Redirect::action('AddressController@index');
     }
 
     /**
@@ -56,15 +65,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
-        $items = Order::find($id)->product()->get();
-
-        $sum = 0;
-        foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
-        }
-
-        return view('profile.show', ['order' => $order, 'items'=>$items, 'sum'=>$sum]);
+        
     }
 
     /**
@@ -75,10 +76,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-
-        $addresses = User::find($user->id)->address;
-        return view('profile.edit', ['user' => $user, 'addresses'=>$addresses]);
+        $address = Address::find($id);
+        return view('address.edit', ['address'=>$address]);
     }
 
     /**
@@ -91,15 +90,17 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $user = User::find($id);
-        $user->fname = $request->fname;
-        $user->lname = $request->lname;
-        $user->email = $request->email;
-        $user->save();
+        $address = Address::find($id);
+        $address->name = $request->name;
+        $address->street = $request->street;
+        $address->city = $request->city;
+        $address->state = $request->state;
+        $address->zip = $request->zip;
+        $address->save();
 
-        $request->session()->flash('status', 'Profile information was successfully updated.');
+        $request->session()->flash('status', 'Address information was successfully updated.');
 
-        return view('profile.index', ['user' => $user]);
+        return Redirect::action('AddressController@index');
     }
 
     /**
@@ -110,6 +111,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $address = Address::find($id);
+        $address->delete();
+        return Redirect::action('AddressController@index')->with('status', 'Address information was successfully updated.');;
     }
 }

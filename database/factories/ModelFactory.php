@@ -40,3 +40,14 @@ $factory->define(App\OrderProduct::class, function (Faker\Generator $faker) {
         'quantity' => $faker->numberBetween($min = 1, $max = 20),
     ];
 });
+
+$factory->define(App\Address::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->numberBetween($min = 1, $max = 27),
+        'name' => $faker->word(),
+        'street' => $faker->streetAddress(),
+        'city' => $faker->city(),
+        'state' => $faker->stateAbbr(),
+        'zip' => $faker->postcode(),
+    ];
+});

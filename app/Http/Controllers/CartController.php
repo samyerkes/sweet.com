@@ -7,11 +7,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Order;
-use App\Status;
-use App\Address;
 use Auth;
+use App\Product;
+use App\OrderProduct;
+use DB;
+use Redirect;
 
-class ProfileController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +23,19 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $orders = User::find($user->id)->order;
-        $addresses = User::find($user->id)->address;
+        $cart = DB::table('orders')
+                     ->select('id')
+                     ->where('status_id', '=', 1)
+                     ->where('user_id', '=', $user->id)
+                     ->value('id');
+        $items = Order::find($cart)->product()->get();
 
-        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses]);
+        $sum = 0;
+        foreach($items as $item) {
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+        }
+
+        return view('cart.index', ['items'=>$items, 'sum'=>$sum, 'user'=>$user]);
     }
 
     /**
@@ -34,7 +45,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        // not needed cause we have auth 
+        //
     }
 
     /**
@@ -45,7 +56,23 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // not needed cause we have auth
+        $user = Auth::User();
+        $cart = DB::table('orders')
+                     ->select('id')
+                     ->where('status_id', '=', 1)
+                     ->where('user_id', '=', $user->id)
+                     ->value('id');
+
+        $orderProduct = new OrderProduct;
+        $orderProduct->order_id = $cart; 
+        $orderProduct->product_id = $request->product_id;
+        $orderProduct->quantity = $request->quantity;
+        $orderProduct->save();
+
+        $request->session()->flash('status', 'Product was saved to cart.');
+
+        return Redirect::action('CartController@index');
+
     }
 
     /**
@@ -56,15 +83,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
-        $items = Order::find($id)->product()->get();
-
-        $sum = 0;
-        foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
-        }
-
-        return view('profile.show', ['order' => $order, 'items'=>$items, 'sum'=>$sum]);
+        //
     }
 
     /**
@@ -75,10 +94,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-
-        $addresses = User::find($user->id)->address;
-        return view('profile.edit', ['user' => $user, 'addresses'=>$addresses]);
+        //
     }
 
     /**
@@ -90,16 +106,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id = $request->id;
-        $user = User::find($id);
-        $user->fname = $request->fname;
-        $user->lname = $request->lname;
-        $user->email = $request->email;
-        $user->save();
-
-        $request->session()->flash('status', 'Profile information was successfully updated.');
-
-        return view('profile.index', ['user' => $user]);
+        //
     }
 
     /**
@@ -110,6 +117,13 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $orderProduct = OrderProduct::where('id', '=', $id)->get();
+        
+        return $orderProduct;
+
+        // $orderProduct->delete();
+
+        // return Redirect::action('CartController@index')->with('danger', 'Product was removed from cart.');
     }
 }

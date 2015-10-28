@@ -64,8 +64,9 @@
 		</table>
 	</div>
 
-
-	{{--<a href="{{ route('admin.products.edit', array('id' => $order->id)) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>--}}
+	@if($order->status_id == 1)
+		<a class="btn btn-primary btn-lg">Checkout</a>
+	@endif
 	
 @endsection
 

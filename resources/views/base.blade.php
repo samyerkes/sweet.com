@@ -35,7 +35,12 @@
                         @else
     						<li><a href="{{ route('auth.login') }}">Login</a></li>
     					@endif
-    					<li><a href="cart"><span class="glyphicon glyphicon-shopping-cart hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Shopping Cart</span> <span class="label label-default">2</span></a></li>
+    					<li>
+                            <a href="{{ route('cart.index') }}">
+                                <span class="glyphicon glyphicon-shopping-cart hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Shopping Cart</span> 
+                                <span class="label label-default">2</span>
+                            </a>
+                        </li>
                         @if (Auth::check())
                             @if ($currentUser->role->id < 3)
                                 <li><a href="{{ route('admin') }}"><span class="glyphicon glyphicon-cog hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Employee Dashboard</span></a></li>
