@@ -39,3 +39,7 @@
 
 	{!! Form::close() !!}
 @endsection
+
+@section('sidebar')
+    @include('sidebar.admin')
+@endsection

@@ -27,3 +27,7 @@
     </div>
 </form>
 @endsection
+
+@section('sidebar')
+    @include('sidebar.special')
+@endsection

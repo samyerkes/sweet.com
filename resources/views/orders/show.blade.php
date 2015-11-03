@@ -56,7 +56,7 @@
 	</div>
 
 
-	{{--<a href="{{ route('admin.products.edit', array('id' => $order->id)) }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>--}}
+	<a href="#" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark order as completed</a>
 	
 @endsection
 
