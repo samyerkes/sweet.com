@@ -34,6 +34,20 @@
 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 	</div>
 	<h2>Customer reviews</h2>
+
+	<div class="review well well-sm">
+		<p><strong>Jim Duncan</strong> October 20, 2015 
+			<span class="pull-right"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+		</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex quos veritatis sequi consequatur soluta nobis laudantium totam, eos vero eveniet quas similique, doloribus vitae inventore nostrum. Atque, architecto tempore blanditiis.</p>
+	</div>
+
+	<div class="review well well-sm">
+		<p><strong>Sabrina Squires</strong> October 25, 2015 
+			<span class="pull-right"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+		</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex quos veritatis sequi consequatur soluta nobis laudantium totam, eos vero eveniet quas similique, doloribus vitae inventore nostrum. Atque, architecto tempore blanditiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium inventore rem molestiae.</p>
+	</div>
 	
 @endsection
 

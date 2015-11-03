@@ -18,15 +18,14 @@
         </div>
         <div class="panel-body">
             <strong>Email:</strong> {{ $user->email }}<br />
-            <strong>User since :</strong> {{ $user->created_at }}<br />
+            <strong>User since :</strong> {{ date('F d, Y', strtotime($user->created_at)) }}<br />
         </div>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $user->fname }}'s default addresses <a href="{{ route('profile.address.index') }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
-        </div>
-        
+        </div>      
         <table class="table table-striped">
             <thead>
                 <th>Name</th>
@@ -44,8 +43,35 @@
                     <td>{{ $addr->zip }}</td>
                 </tr>
             @endforeach
-        </table>
-        
+        </table>   
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ $user->fname }}'s default payment options <a href="#" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+        </div>      
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Card type</th>
+                <th>Number</th>
+                <th>Expiration</th>
+            </thead>
+            @foreach($addresses as $addr)
+                <tr>
+                    <td>Primary card</td>
+                    <td>Visa</td>
+                    <td>9302-XXXX-XXXX-XXXX</td>
+                    <td>01/17</td>
+                </tr>
+                <tr>
+                    <td>Secondary card</td>
+                    <td>Mastercard</td>
+                    <td>3942-XXXX-XXXX-XXXX</td>
+                    <td>04/17</td>
+                </tr>
+            @endforeach
+        </table>   
     </div>
 
     <div class="panel panel-default">
