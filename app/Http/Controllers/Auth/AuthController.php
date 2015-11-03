@@ -63,7 +63,7 @@ class AuthController extends Controller
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'email' => $data['email'],
-            'role_id' => '3',
+            'role_id' => 3,
             'password' => bcrypt($data['password']),
         ]);
     }
