@@ -55,8 +55,9 @@
 		</table>
 	</div>
 
-
-	<a href="#" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark order as completed</a>
+	@if ($order->status->id == 2)
+		<a href="#" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark order as completed</a>
+	@endif
 	
 @endsection
 
