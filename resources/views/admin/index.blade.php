@@ -33,7 +33,7 @@
                     <div class="panel-heading">Users</div>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{ route('admin.users.index') }}">All users</a></li>
-                        <li class="list-group-item"><a href="{{ route('admin.schedule.index') }}">Employee schedule</a></li>
+                        <li class="list-group-item"><a href="#">Employee schedule</a></li>
                     </ul>
                 </div>
 
@@ -45,9 +45,9 @@
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Metrics</div>
+                    <div class="panel-heading">Reports</div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ route('admin.metrics.index') }}">Orders</a></li>
+                        <li class="list-group-item"><a href="#">Orders</a></li>
                     </ul>
                 </div>
             </div>
