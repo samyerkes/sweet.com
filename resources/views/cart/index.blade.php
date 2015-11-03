@@ -4,7 +4,10 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Current cart items <span class="pull-right badge">{{ $items->count() }}</span>
+            Current cart items 
+            @if(!empty($cartItems))
+                <span class="pull-right badge">{{ $cartItems }}</span>
+            @endif
         </div>
         <table class="table">
             <thead>
@@ -22,9 +25,8 @@
                         <td>{{ $item->pivot->quantity }}</td>
                         <td>${{ number_format($item->pivot->quantity * $item->price, 2) }}</td>
                         <td>
-                            {!! Form::open(['method'=>'DELETE', 'route'=>'cart.destroy']) !!}
-                                {!! Form::hidden('item', $item->pivot->id) !!}
-                                {!! Form::submit('Remove', array('class' => 'text-muted btn-danger btn-xs btn' )) !!}
+                            {!! Form::open(['route' => ['cart.destroy', $item->pivot->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Remove', array('class' => 'btn-danger btn-xs btn pull-right' )) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>
@@ -35,11 +37,12 @@
                 <th></th>
                 <th></th>
                 <th>${{ number_format($sum, 2) }}</th>
+                <th></th>
             </tfoot>
         </table>
     </div>
 
-    <a class="btn btn-primary btn-lg pull-right">Checkout <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span><span class="sr-only">Remove item</span></a> 
+    <a class="btn btn-primary btn-lg pull-right" href="{{ route('cart.checkout') }}">Checkout <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span><span class="sr-only">Remove item</span></a> 
     
 @endsection
 

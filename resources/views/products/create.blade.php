@@ -3,6 +3,16 @@
 @section('content')
 	<h1>Add Product</h1>
 
+	@if (count($errors) > 0)
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
+
     {!! Form::open(array('action' => 'ProductController@store', 'id'=>'myform', 'files' => true)) !!}
 		<div class="form-group">
     		{!! Form::label('Name', 'Name'); !!}

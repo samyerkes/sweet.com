@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Order;
 use Storage;
+use DB;
 
 class ProductController extends Controller
 {
@@ -47,6 +49,20 @@ class ProductController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lowInventory()
+    {
+        $products = DB::table('products')
+                ->where('inventory', '<=', 10)
+                ->get();
+
+        return view('products.low', ['products' => $products]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -64,6 +80,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'Name' => 'required|max:25',
+            'Price' => 'required',
+            'Description' => 'required',
+            'Image' => 'required',
+            'Quantity' => 'required',
+        ]);
 
         $product = new Product;
         $product->name = $request->Name;
@@ -94,8 +118,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        $weekAgo = \Carbon\Carbon::now()->subDays(7);
+
         $product = Product::find($id);
-        return view('products.show', ['product' => $product]);
+        $orders = Order::all();
+        return view('products.show', ['product' => $product, 'orders'=>$orders]);
     }
 
     /**

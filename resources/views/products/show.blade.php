@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-	@if ($product->inventory < 5)
+	@if ($product->inventory < 10)
 		<div class="panel panel-warning">
 	@else
 		<div class="panel panel-success">
@@ -19,8 +19,33 @@
 		<div class="panel-heading">
 			Sales of {{ $product->name }} this week
 		</div>
-		<div class="panel-body">
-			<img src="http://www.mathgoodies.com/lessons/graphs/images/construct_line_incorrect.jpg" alt="" class="img-responsive">
-		</div>
+		<table class="table">
+			<thead>
+				<th>ID</th>
+				<th>Customer</th>
+				<th>Date Ordered</th>
+				<th>Status</th>
+			</thead>
+			@foreach ($orders as $order)
+				<tr>
+					<td><a href="{{ route('admin.orders.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
+					<td>{{ $order->user->fname }} {{ $order->user->lname }}</td>
+					<td>{{ $order->dateOrdered }}</td>
+					<td>
+						@if ( $order->status_id == 1)
+							<span class="glyphicon glyphicon-shopping-cart"></span>
+						@elseif ( $order->status_id == 2)
+							<span class="glyphicon glyphicon-arrow-right"></span>
+						@else
+							<span class="glyphicon glyphicon-ok"></span>
+						@endif
+					</td>
+				</tr>
+			@endforeach
+		</table>
 	</div>
+@endsection
+
+@section('sidebar')
+    @include('sidebar.admin')
 @endsection

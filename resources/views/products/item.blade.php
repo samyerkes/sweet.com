@@ -14,7 +14,6 @@
 			
 			{!! Form::open(array('action' => 'CartController@store')) !!}
 				{!! Form::hidden('product_id', $product->id) !!}
-
 				<div class="form-group">
 					{!! Form::label('quantity', 'Quantity'); !!}
 			    	{!! Form::number('quantity', 1, array('class' => 'form-control', 'placeholder'=>'1')); !!}
@@ -31,8 +30,11 @@
 	</div>
 
 	<hr>
+	<div class="pull-right">
+		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+	</div>
 	<h2>Customer reviews</h2>
-	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+	
 @endsection
 
 @section('sidebar')

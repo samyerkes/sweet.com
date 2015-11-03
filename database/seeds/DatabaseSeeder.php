@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
         $this->call(OrderProductTableSeeder::class);    
-        $this->call(AddressTableSeeder::class);        
+        $this->call(AddressTableSeeder::class);   
+        $this->call(EmployeeDatesTableSeeder::class);
+        $this->call(EmployeeShiftsTableSeeder::class);
 
         Model::reguard();
     }

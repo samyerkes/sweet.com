@@ -60,4 +60,12 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Address');
     }
+
+    /**
+     * Get the users shifts
+     */
+    public function shift()
+    {
+        return $this->belongsToMany('App\Shift', 'user_shifts', 'shift_id', 'user_id')->withPivot('start_time', 'end_time');
+    }
 }

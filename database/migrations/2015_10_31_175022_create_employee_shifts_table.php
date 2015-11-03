@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateEmployeeShiftsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('user_shifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->decimal('price', 5, 2);
-            $table->longText('description');
-            $table->integer('inventory');
-            $table->softDeletes();
+            $table->integer('shift_id');
+            $table->integer('user_id');
+            $table->time('start_time');
+            $table->time('end_time');
         });
     }
 

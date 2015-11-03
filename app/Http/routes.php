@@ -36,7 +36,14 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function () {
 
+	Route::get('cart/checkout', [
+	    'as' => 'cart.checkout', 'uses' => 'CartController@checkout'
+	]);
+	Route::put('cart/checkout', [
+	    'as' => 'cart.submit', 'uses' => 'CartController@submitOrder'
+	]);
 	Route::resource('cart', 'CartController');
+
 	Route::resource('profile/address', 'AddressController');
 	Route::resource('profile', 'ProfileController');
 	Route::group(['middleware' => 'UserInfo'], function() {
@@ -46,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 	    Route::resource('profile', 'ProfileController', ['only' => ['show']]);
 	});
 	
+	Route::resource('admin/schedule', 'ScheduleController');
 
 	Route::group(['middleware' => 'admin'], function() {
 		Route::get('/admin', ['as' => 'admin', function () {
@@ -53,7 +61,9 @@ Route::group(['middleware' => 'auth'], function () {
 		}]);
 
 		Route::resource('/admin/users', 'UserController');
+		Route::resource('/admin/metrics', 'MetricsController');
 
+		Route::get('/admin/products/low', ['as' => 'admin.products.low', 'uses' => 'ProductController@lowInventory']);		
 		Route::resource('admin/products', 'ProductController');
 
 		Route::get('/admin/orders/pending', ['as' => 'admin.orders.pending', 'uses' => 'OrderController@pending']);

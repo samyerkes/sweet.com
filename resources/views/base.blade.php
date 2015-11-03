@@ -38,7 +38,9 @@
     					<li>
                             <a href="{{ route('cart.index') }}">
                                 <span class="glyphicon glyphicon-shopping-cart hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Shopping Cart</span> 
-                                <span class="label label-default">2</span>
+                                @if(!empty($cartItems))
+                                    <span class="label label-default">{{ $cartItems }}</span>
+                                @endif
                             </a>
                         </li>
                         @if (Auth::check())

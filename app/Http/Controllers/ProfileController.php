@@ -10,6 +10,7 @@ use App\Order;
 use App\Status;
 use App\Address;
 use Auth;
+use Redirect;
 
 class ProfileController extends Controller
 {
@@ -63,8 +64,11 @@ class ProfileController extends Controller
         foreach($items as $item) {
             $sum+= number_format($item->pivot->quantity * $item->price, 2);    
         }
-
-        return view('profile.show', ['order' => $order, 'items'=>$items, 'sum'=>$sum]);
+        if($order->status_id == 1) {
+            return Redirect::action('CartController@index');
+        } else {
+            return view('profile.show', ['order' => $order, 'items'=>$items, 'sum'=>$sum]);
+        }
     }
 
     /**
@@ -90,6 +94,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+        ]);
+
         $id = $request->id;
         $user = User::find($id);
         $user->fname = $request->fname;
