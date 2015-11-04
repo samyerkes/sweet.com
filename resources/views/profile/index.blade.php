@@ -57,7 +57,6 @@
                 <th>Number</th>
                 <th>Expiration</th>
             </thead>
-            @foreach($addresses as $addr)
                 <tr>
                     <td>Primary card</td>
                     <td>Visa</td>
@@ -70,7 +69,6 @@
                     <td>3942-XXXX-XXXX-XXXX</td>
                     <td>04/17</td>
                 </tr>
-            @endforeach
         </table>   
     </div>
 
