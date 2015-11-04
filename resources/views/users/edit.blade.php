@@ -3,9 +3,7 @@
 @section('content')
 	<h1>Edit User</h1>
 
-    {!! Form::open(array('action' => 'UserController@update', $user->id, 'method' => 'PUT')) !!}
-
-		{!! Form::hidden('id', $user->id) !!}
+    {!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.users.update', $user->id ] ]) !!}
 
     	<div class="form-group">
     		{!! Form::label('fname', 'First Name'); !!}

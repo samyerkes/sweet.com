@@ -3,7 +3,6 @@
 @section('content')
 	<h1>Edit Product</h1>
 	{!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.products.update', $product->id ], 'id'=>'myform', 'files' => true ]) !!}
-    <!--{!! Form::open(array('action' => 'ProductController@update', $product->id, 'method' => 'PUT', 'id'=>'myform', 'files' => true)) !!}-->
 
     		{!! Form::hidden('id', $product->id) !!}
 
