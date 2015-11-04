@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
 use App\OrderProduct;
+use Redirect;
 
 class OrderController extends Controller
 {
@@ -112,7 +113,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $orderProduct = Order::find($id);
+        $orderProduct->status_id = 3;
+        $orderProduct->dateCompleted = \Carbon\Carbon::now();
+        $orderProduct->save();
+
+        return Redirect::action('OrderController@show', ['id' => $orderProduct->id]);
     }
 
     /**

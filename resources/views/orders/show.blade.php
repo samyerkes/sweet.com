@@ -56,7 +56,10 @@
 	</div>
 
 	@if ($order->status->id == 2)
-		<a href="#" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark order as completed</a>
+		{{-- Form::open([ 'method'  => 'delete', 'route' => [ 'items.destroy', $item->id ] ]) --}}
+		{!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.orders.update', $order->id ] ]) !!}
+            {!! Form::submit('Mark order as completed', array('class' => 'btn-success btn-lg btn pull-right' )) !!}
+        {!! Form::close() !!}
 	@endif
 	
 @endsection
