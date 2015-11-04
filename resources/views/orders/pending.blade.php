@@ -2,6 +2,10 @@
 
 @section('content')
 
+	<?php 
+		var_dump($orders);
+	?>
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			All pending orders <span class="pull-right badge">{{ $orders->count() }}</span>
