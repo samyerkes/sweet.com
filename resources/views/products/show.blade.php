@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('styles')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.9.4/chartist.min.css" />
+@endsection
+
 @section('content')
 	@if ($product->inventory < 10)
 		<div class="panel panel-warning">
@@ -14,10 +18,19 @@
 			<p>{!! $product->description !!}</p>
 	    </div>
 	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Sales metrics
+		</div>
+		<div class="panel-body">
+			<div class="ct-chart ct-major-tenth"></div>
+		</div>
+	</div>
 	
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Sales of {{ $product->name }} this week
+			Orders this week containing {{ $product->name }}
 		</div>
 		<table class="table">
 			<thead>
@@ -48,4 +61,24 @@
 
 @section('sidebar')
     @include('sidebar.admin')
+@endsection
+
+@section('scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.9.4/chartist.min.js"></script>
+	<script>
+		var data = {
+			// A labels array that can contain any sort of values
+			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+			// Our series array that contains series objects or in this case series data arrays
+			series: [[5, 7, 5, 8, 5]]
+		};
+		var options = {
+		  width: 300,
+		  height: 200
+		};
+		// Create a new line chart object where as first parameter we pass in a selector
+		// that is resolving to our chart container element. The Second parameter
+		// is the actual data object.
+		new Chartist.Line('.ct-chart', data);
+	</script>
 @endsection
