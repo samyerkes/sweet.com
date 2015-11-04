@@ -4,7 +4,7 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			All pending orders <span class="pull-right badge">{{ $porders->count() }}</span>
+			All pending orders <span class="pull-right badge">{{ $orders->count() }}</span>
 		</div>
 		<table class="table">
 			<thead>
@@ -13,15 +13,15 @@
 				<th>Date Ordered</th>
 				<th>Status</th>
 			</thead>
-			@foreach ($porders as $porder)
+			@foreach ($orders as $order)
 				<tr>
-					<td><a href="{{ route('admin.orders.show', array('id' => $porder->id)) }}">{{ $porder->id }}</a></td>
-					<td>{{ $porder->user->fname }} {{ $porder->user->lname }}</td>
-					<td>{{ $porder->dateOrdered }}</td>
+					<td><a href="{{ route('admin.orders.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
+					<td>{{ $order->user->fname }} {{ $order->user->lname }}</td>
+					<td>{{ $order->dateOrdered }}</td>
 					<td>
-						@if ( $porder->status_id == 1)
+						@if ( $order->status_id == 1)
 							<span class="glyphicon glyphicon-shopping-cart"></span>
-						@elseif ( $porder->status_id == 2)
+						@elseif ( $order->status_id == 2)
 							<span class="glyphicon glyphicon-arrow-right"></span>
 						@else
 							<span class="glyphicon glyphicon-ok"></span>

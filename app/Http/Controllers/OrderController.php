@@ -29,8 +29,9 @@ class OrderController extends Controller
      */
     public function pending()
     {
-        $porders = Order::all()->where('status_id', 2);
-        return view('orders.pending', ['porders' => $porders]);
+        $orders = Order::all()->where('status_id', 2);
+        return $orders;
+        // return view('orders.pending', ['orders' => $orders]);
     }
 
     /**
