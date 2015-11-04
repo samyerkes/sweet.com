@@ -25,7 +25,15 @@
                 <tr>
                     <td><a href="{{ route('admin.orders.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
                     <td>{{ $order->dateOrdered }}</td>
-                    <td>{{ $order->status->status }}</td>
+                    <td>
+                    @if ( $order->status->status == 1)
+						<span class="glyphicon glyphicon-shopping-cart"></span>
+					@elseif ( $order->status->status == 2)
+						<span class="glyphicon glyphicon-arrow-right"></span>
+					@else
+						<span class="glyphicon glyphicon-ok"></span>
+					@endif
+					</td>
                 </tr>
             @endforeach
 		</table>
