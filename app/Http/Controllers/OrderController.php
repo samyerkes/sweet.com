@@ -118,6 +118,8 @@ class OrderController extends Controller
         $orderProduct->dateCompleted = \Carbon\Carbon::now();
         $orderProduct->save();
 
+        $request->session()->flash('status', 'Order has been marked as completed!');
+
         return Redirect::action('OrderController@show', ['id' => $orderProduct->id]);
     }
 
