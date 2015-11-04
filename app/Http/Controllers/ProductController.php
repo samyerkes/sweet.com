@@ -155,13 +155,15 @@ class ProductController extends Controller
         $product->inventory = $request->Quantity;
         $product->save();
 
-        $extension = $request->file('Image')->getClientOriginalExtension();
-        $imageName = 'product-' .$product->id . '.' . $extension;
+        if(!empty($request->file('Image'))) {
+            $extension = $request->file('Image')->getClientOriginalExtension();
+            $imageName = 'product-' .$product->id . '.' . $extension;
 
-        $request->file('Image')->move(
-            base_path() . '/public/uploads/images/products/', $imageName
-        );
-
+            $request->file('Image')->move(
+                base_path() . '/public/uploads/images/products/', $imageName
+            );    
+        }
+        
         $request->session()->flash('status', 'Product was successfully updated.');
 
         $products = Product::all();

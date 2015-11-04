@@ -56,7 +56,6 @@
 	</div>
 
 	@if ($order->status->id == 2)
-		{{-- Form::open([ 'method'  => 'delete', 'route' => [ 'items.destroy', $item->id ] ]) --}}
 		{!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.orders.update', $order->id ] ]) !!}
             {!! Form::submit('Mark order as completed', array('class' => 'btn-success btn-lg btn pull-right' )) !!}
         {!! Form::close() !!}
