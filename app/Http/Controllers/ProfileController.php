@@ -24,8 +24,9 @@ class ProfileController extends Controller
         $user = Auth::User();
         $orders = User::find($user->id)->order;
         $addresses = User::find($user->id)->address;
+        $creditcards = User::find($user->id)->creditcard;
 
-        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses]);
+        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses, 'creditcards'=>$creditcards]);
     }
 
     /**

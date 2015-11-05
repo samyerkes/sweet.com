@@ -72,8 +72,9 @@ class CartController extends Controller
         }
 
         $addresses = $user->address()->get();
+        $creditcards = $user->creditcard()->get();
 
-        return view('cart.checkout', ['items'=>$items, 'sum'=>$sum, 'user'=>$user, 'addresses'=>$addresses, 'order'=>$order]);
+        return view('cart.checkout', ['items'=>$items, 'sum'=>$sum, 'user'=>$user, 'addresses'=>$addresses, 'order'=>$order, 'creditcards'=>$creditcards]);
     }
 
     /**

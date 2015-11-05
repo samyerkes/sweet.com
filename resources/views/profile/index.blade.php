@@ -48,27 +48,23 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            {{ $user->fname }}'s default payment options <a href="#" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+            {{ $user->fname }}'s default payment options <a href="{{ route('profile.card.index') }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
         </div>      
         <table class="table table-striped">
             <thead>
                 <th>Name</th>
-                <th>Card type</th>
                 <th>Number</th>
                 <th>Expiration</th>
+                <th>CVC</th>
             </thead>
+                @foreach($creditcards as $cc)
                 <tr>
-                    <td>Primary card</td>
-                    <td>Visa</td>
-                    <td>9302-XXXX-XXXX-XXXX</td>
-                    <td>01/17</td>
+                    <td>{{ $cc->name }}</td>
+                    <td>{{ $cc->number }}</td>
+                    <td>{{ $cc->expiration }}</td>
+                    <td>{{ $cc->cvc }}</td>
                 </tr>
-                <tr>
-                    <td>Secondary card</td>
-                    <td>Mastercard</td>
-                    <td>3942-XXXX-XXXX-XXXX</td>
-                    <td>04/17</td>
-                </tr>
+            @endforeach
         </table>   
     </div>
 

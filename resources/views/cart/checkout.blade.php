@@ -53,8 +53,12 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('payment', 'Payment method') !!}
-        {!! Form::text('payment', null, ['class'=>'form-control', 'placeholder'=>'xxx-xxx-xxxx']) !!}
+        {!! Form::label('payment', 'Saved payment methods'); !!}
+        <select name="payment" class="form-control">
+            @foreach ($creditcards as $cc)
+                <option value="{{ $cc->name }}, {{ $cc->number }}, {{ $cc->expiration }}, {{ $cc->cvc }}">{{ $cc->name }} - {{ $cc->number }}</option>
+            @endforeach
+        </select>
     </div>
 
     {!! Form::submit('Submit order', ['class'=>'btn btn-primary btn-lg pull-right']) !!}

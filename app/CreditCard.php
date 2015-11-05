@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class CreditCard extends Model
 {
-	
     /**
-     * Get the owner of the address
+     * Get the owner of the credit card
      */
     public function owner()
     {

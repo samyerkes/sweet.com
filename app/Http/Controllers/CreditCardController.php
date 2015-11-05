@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Address;
 use Auth;
+use App\User;
+use App\CreditCard;
 use Redirect;
 
-class AddressController extends Controller
+class CreditCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +20,8 @@ class AddressController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $addresses = User::find($user->id)->address;
-        return view('address.index', ['user' => $user, 'addresses'=>$addresses]);
+        $creditcards = User::find($user->id)->creditcard;
+        return view('creditcard.index', ['user' => $user, 'creditcards'=>$creditcards]);
     }
 
     /**
@@ -31,7 +31,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view('address.create');
+        return view('creditcard.create');
     }
 
     /**
@@ -43,18 +43,17 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $address = new Address;
-        $address->user_id = $user->id;
-        $address->name = $request->name;
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->zip = $request->zip;
-        $address->save();
+        $cc = new CreditCard;
+        $cc->user_id = $user->id;
+        $cc->name = $request->name;
+        $cc->number = $request->number;
+        $cc->expiration = $request->expiration;
+        $cc->cvc = $request->cvc;
+        $cc->save();
 
-        $request->session()->flash('status', 'Address information was successfully saved.');
+        $request->session()->flash('status', 'Credit card information was successfully saved.');
 
-        return Redirect::action('AddressController@index');
+        return Redirect::action('CreditCardController@index');
     }
 
     /**
@@ -65,7 +64,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -76,8 +75,8 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $address = Address::find($id);
-        return view('address.edit', ['address'=>$address]);
+        $creditcard = CreditCard::find($id);
+        return view('creditcard.edit', ['creditcard'=>$creditcard]);
     }
 
     /**
@@ -89,18 +88,18 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $id = $request->id;
-        $address = Address::find($id);
-        $address->name = $request->name;
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->zip = $request->zip;
+        $cc = CreditCard::find($id);
+        $cc->name = $request->name;
+        $cc->number = $request->number;
+        $cc->expiration = $request->expiration;
+        $cc->cvc = $request->cvc;
         $address->save();
 
-        $request->session()->flash('status', 'Address information was successfully updated.');
+        $request->session()->flash('status', 'Credit card information was successfully updated.');
 
-        return Redirect::action('AddressController@index');
+        return Redirect::action('CreditCardController@index');
     }
 
     /**
@@ -111,8 +110,8 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $address = Address::find($id);
-        $address->delete();
-        return Redirect::action('AddressController@index')->with('status', 'Address information was successfully updated.');
+        $cc = CreditCard::find($id);
+        $cc->delete();
+        return Redirect::action('CreditCardController@index')->with('status', 'Credit card information was successfully updated.');
     }
 }

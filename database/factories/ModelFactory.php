@@ -51,3 +51,13 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
         'zip' => $faker->postcode(),
     ];
 });
+
+$factory->define(App\CreditCard::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->numberBetween($min = 1, $max = 27),
+        'name' => $faker->word(),
+        'number' => $faker->creditCardNumber(),
+        'expiration' => $faker->creditCardExpirationDate(),
+        'cvc' => 123,
+    ];
+});

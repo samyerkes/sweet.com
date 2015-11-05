@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddressTableMigration extends Migration
+class Creditcards extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateAddressTableMigration extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('credit_cards', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name');
-            $table->string('street');
-            $table->string('city');
-            $table->string('state');
-            $table->integer('zip');
+            $table->string('number');
+            $table->integer('expiration');
+            $table->integer('cvc');
             $table->timestamps();
         });
     }

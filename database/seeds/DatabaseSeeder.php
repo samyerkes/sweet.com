@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AddressTableSeeder::class);   
         $this->call(EmployeeDatesTableSeeder::class);
         $this->call(EmployeeShiftsTableSeeder::class);
+        $this->call(CreditcardTableSeeder::class);
 
         Model::reguard();
     }

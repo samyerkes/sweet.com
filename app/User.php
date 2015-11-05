@@ -62,6 +62,14 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+     * Get the users credit cards
+     */
+    public function creditcard()
+    {
+        return $this->hasMany('App\CreditCard');
+    }
+
+    /**
      * Get the users shifts
      */
     public function shift()
