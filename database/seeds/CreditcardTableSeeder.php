@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CreditcardTableSeeder extends Seeder
+class CreditCardTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,3 +14,4 @@ class CreditcardTableSeeder extends Seeder
         factory('App\CreditCard', 50)->create();
     }
 }
+
