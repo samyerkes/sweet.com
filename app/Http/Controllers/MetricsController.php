@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Order;
+use DB;
+use Response;
 
 class MetricsController extends Controller
 {
@@ -16,8 +18,13 @@ class MetricsController extends Controller
      */
     public function index()
     {
+    $orders = DB::table('orders')
+         ->select(DB::raw('SUM(transaction_total) as dayTotal, COUNT(id) as numberTransaction, dateOrdered'))
+         ->where('status_id', '>', 1)
+         ->groupBy('dateOrdered')
+         ->get();
 
-        return "metrics index";
+        return view('metrics.index', ['orders' => $orders]);
     }
 
     /**

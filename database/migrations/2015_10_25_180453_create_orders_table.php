@@ -20,6 +20,8 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->string('payment');
             $table->date('dateCompleted')->nullable();
+            $table->decimal('transaction_total');
+            $table->timestamps();
         });
     }
 

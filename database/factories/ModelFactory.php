@@ -29,6 +29,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'status_id' => $faker->numberBetween($min = 1, $max = 3),
         'address' => $faker->address(),
         'payment' => $faker->creditCardNumber(),
+        'transaction_total' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 100),
         'dateCompleted' => NULL,
     ];
 });

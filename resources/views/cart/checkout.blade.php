@@ -43,6 +43,7 @@
 
     {!! Form::open(array('action' => 'CartController@submitOrder', $order->id, 'method' => 'PUT')) !!}
     {!! Form::hidden('id', $order->id) !!}
+    {!! Form::hidden('total', number_format($sum, 2)) !!}
     <div class="form-group">
         {!! Form::label('address', 'Saved addresses'); !!}
         <select name="address" class="form-control">

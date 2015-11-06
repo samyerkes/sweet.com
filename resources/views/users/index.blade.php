@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="panel panel-default">
-		<div class="panel-heading">All users</div>
+		<div class="panel-heading">Transaction in the last month</div>
 		<table class="table table-striped">
 			<thead>
 				<th>ID</th>

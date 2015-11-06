@@ -103,6 +103,7 @@ class CartController extends Controller
             $product->save();
         }
 
+        $order->transaction_total = $request->total;
         $order->dateOrdered = $now;
         $order->status_id = 2;
         $order->address = $request->address;

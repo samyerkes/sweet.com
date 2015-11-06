@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public $timestamps = false;
-
     /**
      * Get the user who made the order
      */
