@@ -81,7 +81,13 @@
             @foreach($user->order as $order)
                 <tr>
                     <td><a href="{{ route('profile.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
-                    <td>{{ $order->dateOrdered }}</td>
+                    <td>
+                        @if ( $order->status_id == 1)
+                            Cart is still open
+                        @else
+                            {{ date('F d, Y', strtotime($order->dateOrdered)) }}
+                        @endif
+                    </td>
                     <td>
                         @if ( $order->status_id == 1)
                             <span class="glyphicon glyphicon-shopping-cart"></span>
