@@ -153,11 +153,22 @@ class CartController extends Controller
             $orderProduct->quantity = $request->quantity;
             $orderProduct->save();
         } else {
-            $orderProduct = new OrderProduct;
-            $orderProduct->order_id = $cart; 
-            $orderProduct->product_id = $request->product_id;
-            $orderProduct->quantity = $request->quantity;
-            $orderProduct->save();
+            // if you already have this product in your cart just add the next quantity to the same line item
+            if (OrderProduct::where('order_id', $cart)->where('product_id', $request->product_id)->exists() ){
+                $repeatOrderProduct = OrderProduct::where('order_id', $cart)->where('product_id', $request->product_id)->first();
+                $orderProduct = OrderProduct::find($repeatOrderProduct->id);
+                $orderProduct->product_id = $request->product_id;
+                $orderProduct->quantity = $request->quantity + $orderProduct->quantity;
+                $orderProduct->save();
+            } 
+            // else make a new line item for this new item
+            else {
+                $orderProduct = new OrderProduct;
+                $orderProduct->order_id = $cart; 
+                $orderProduct->product_id = $request->product_id;
+                $orderProduct->quantity = $request->quantity;
+                $orderProduct->save();
+            }
         }
 
         $request->session()->flash('status', 'Product was saved to cart.');
