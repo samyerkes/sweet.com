@@ -9,17 +9,29 @@
             </div>
         </div>
         <div class="col-md-6">
-        	<h3>{{ $product->name }}</h3>
+        	<h3>{{ $product->name }} 
+        		@if($product->created_at > \Carbon\Carbon::now()->subWeek())
+        			<span class="label label-info">New!</span>
+        		@endif
+
+	        	@if($product->inventory < 10)
+	        		<span class="label label-warning">Low inventory</span>
+	        	@endif
+        	</h3>
 			<p>${{ $product->price }} per unit</p>
 			
-			{!! Form::open(array('action' => 'CartController@store')) !!}
-				{!! Form::hidden('product_id', $product->id) !!}
-				<div class="form-group">
-					{!! Form::label('quantity', 'Quantity'); !!}
-			    	{!! Form::number('quantity', 1, array('class' => 'form-control', 'placeholder'=>'1')); !!}
-				</div>
-			{!! Form::submit('Add to cart', array('class'=>'btn btn-primary')); !!}
-			{!! Form::close() !!}
+			@if($product->inventory < 10)
+				Product on backorder.
+			@else
+				{!! Form::open(array('action' => 'CartController@store')) !!}
+					{!! Form::hidden('product_id', $product->id) !!}
+					<div class="form-group">
+						{!! Form::label('quantity', 'Quantity'); !!}
+				    	{!! Form::number('quantity', 1, array('class' => 'form-control', 'placeholder'=>'1')); !!}
+					</div>
+				{!! Form::submit('Add to cart', array('class'=>'btn btn-primary')); !!}
+				{!! Form::close() !!}
+			@endif
 
         </div>
 	</div>

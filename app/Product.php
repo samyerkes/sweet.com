@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
 	use SoftDeletes;
-    public $timestamps = false;
 
     /**
      * The attributes that should be mutated to dates.

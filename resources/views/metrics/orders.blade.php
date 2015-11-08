@@ -44,19 +44,19 @@
 		var data = {
 			// A labels array that can contain any sort of values
 			labels: [
-				@foreach($orders as $order)
-					'{{ $order->dateOrdered }}',
+				@foreach($measure as $m)
+					'{{ $m->dateOrdered }}',
 				@endforeach
 			],
 			// Our series array that contains series objects or in this case series data arrays
 			series: [
 				[
-					@foreach($orders as $order)
-						'{{ $order->dayTotal }}',
+					@foreach($measure as $m)
+						'{{ $m->dayTotal }}',
 					@endforeach
 				], [
-					@foreach($orders as $order)
-						'{{ $order->numberTransaction }}',
+					@foreach($measure as $m)
+						'{{ $m->numberTransaction }}',
 					@endforeach
 				]
 			]

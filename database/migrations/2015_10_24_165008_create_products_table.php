@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->longText('description');
             $table->integer('inventory');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

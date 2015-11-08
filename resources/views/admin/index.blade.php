@@ -49,8 +49,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ route('admin.metrics.index') }}">Transaction metrics</a></li>
-                        <li class="list-group-item"><a href="#">Products</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.metrics.orders') }}">Transaction metrics</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.metrics.inventory') }}">Product inventory</a></li>
                     </ul>
                 </div>
             </div>

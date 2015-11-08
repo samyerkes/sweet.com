@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Product;
 use DB;
 use Response;
 
@@ -16,15 +17,26 @@ class MetricsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function orders()
     {
-    $orders = DB::table('orders')
-         ->select(DB::raw('SUM(transaction_total) as dayTotal, COUNT(id) as numberTransaction, dateOrdered'))
-         ->where('status_id', '>', 1)
-         ->groupBy('dateOrdered')
-         ->get();
+        $measure = DB::table('orders')
+             ->select(DB::raw('SUM(transaction_total) as dayTotal, COUNT(id) as numberTransaction, dateOrdered'))
+             ->where('status_id', '>', 1)
+             ->groupBy('dateOrdered')
+             ->get();
+        return view('metrics.orders', ['measure' => $measure]);
+    }
 
-        return view('metrics.index', ['orders' => $orders]);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inventory()
+    {
+        $measurementHeading = "Product inventory quantities";
+        $measure = Product::all();
+        return view('metrics.inventory', ['measure' => $measure, 'measurementHeading' => $measurementHeading]);
     }
 
     /**
