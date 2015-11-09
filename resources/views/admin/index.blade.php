@@ -21,7 +21,6 @@
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{ route('admin.products.index') }}">Edit</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.products.low') }}">Low inventory</a></li>
-                        <li class="list-group-item"><a href="#">Recipes</a></li>
                         <li class="list-group-item"><a href="#">Manage reviews</a></li>
                     </ul>
                 </div>
@@ -42,7 +41,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Store</div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Hours</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.hours.index') }}">Hours</a></li>
                     </ul>
                 </div>
 

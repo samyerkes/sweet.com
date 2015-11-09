@@ -3,6 +3,6 @@
     <ul class="list-group">
         <li class="list-group-item"><strong>Orders:</strong> {{ $orders }}</li>
         <li class="list-group-item"><strong>Employees scheduled:</strong> 4</li>
-        <li class="list-group-item"><strong>Store hours:</strong> 10 a.m. - 6 p.m.</li>
+        <li class="list-group-item"><strong>Store hours:</strong> {{ $hours }}</li>
     </ul>
 </div>

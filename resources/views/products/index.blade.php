@@ -11,13 +11,13 @@
 	    		<th>ID</th>
 		    	<th>Name</th>
 		    	<th>Price</th>
-		    	<th>Quantity</th>	
+		    	<th>Quantity</th>
 	    	</thead>
 	    	@foreach ($products as $p)
 	    		<tr>
 	    			<td><a href="{{ route('admin.products.show', array('id' => $p->id)) }}">{{ $p->id }}</a></td>
 		    		<td>{{ $p->name }}</td>
-		    		<td>{{ $p->price }}</td>
+		    		<td>${{ $p->price }}</td>
 		    		<td>{{ $p->inventory }}</td>
 		    	</tr>
 	    	@endforeach

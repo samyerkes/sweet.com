@@ -4,7 +4,7 @@
 	
 	<h1>Edit saved credit card</h1>
 
-    {!! Form::open(array('action' => 'CreditCardController@store')) !!}
+    {!! Form::open(array('action' => 'CreditCardController@update', $creditcard->id, 'method' => 'PUT')) !!}
 
     	{!! Form::hidden('id', $creditcard->id) !!}
 

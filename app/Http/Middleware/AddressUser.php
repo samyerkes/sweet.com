@@ -20,10 +20,10 @@ class AddressUser
         $addressId = $request->segments()[2];
         $addrUser = Address::find($addressId);
 
-        if ($addrUser->user_id != Auth::user()->id)
-        {
-            return redirect('profile')->with('danger', 'This address is not associated with you.');
-        }
+        // if ($addrUser->user_id != Auth::user()->id)
+        // {
+        //     return redirect('profile')->with('danger', 'This address is not associated with you.');
+        // }
         return $next($request);
     }
 }

@@ -69,6 +69,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('/admin/users', 'UserController');
 
+		Route::resource('/admin/recipe', 'RecipeController');
+
+		Route::resource('/admin/hours', 'HoursController');
+
 		Route::get('/admin/metrics/orders', ['as'=>'admin.metrics.orders', 'uses' => 'MetricsController@orders']);
 		Route::get('/admin/metrics/inventory', ['as'=>'admin.metrics.inventory', 'uses' => 'MetricsController@inventory']);
 

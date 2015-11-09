@@ -13,6 +13,7 @@ use App\OrderProduct;
 use DB;
 use Redirect;
 use App\Address;
+use Mail;
 
 class CartController extends Controller
 {
@@ -31,16 +32,14 @@ class CartController extends Controller
                      ->value('id');
         $cartQuantity = DB::table('order_products')->where('order_id', '=', 40)->sum('quantity');
 
-        if(empty($cart)) {
+        if($cart == null) {
             $order = new Order;
             $order->user_id = $user->id;
             $order->status_id = 1;
             $order->save();
-
-            $cart = $order;
         }
-
-        $items = Order::find($cart)->product()->get();
+        
+        $items = Order::findOrFail($cart)->product()->get();
 
         $sum = 0;
         foreach($items as $item) {
@@ -109,6 +108,13 @@ class CartController extends Controller
         $order->address = $request->address;
         $order->payment = $request->payment;
         $order->save();
+
+        $user = Auth::User();
+
+        Mail::send('email.submitorder', ['order' => $order, 'user' => $user, 'items'=>$items], function ($m) use ($order) {
+            $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
+            $m->to('samuelyerkes@gmail.com', 'Sam')->subject('Thank you for your order!');
+        });
         
         $request->session()->flash('status', 'Your order has been submitted!');
 

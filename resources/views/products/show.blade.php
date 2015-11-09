@@ -11,11 +11,13 @@
 		<div class="panel panel-success">
 	@endif
 		<div class="panel-heading">
-			{{ $product->name }} <a href="{{ route('admin.products.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+			{{ $product->name }} 
+			<a href="{{ route('admin.products.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
 		</div>
 		<div class="panel-body">
 			<strong>Price:</strong> ${{ $product->price }} per unit<br />
 			<p>{!! $product->description !!}</p>
+			<p><a href="{{ route('admin.recipe.show', array('id' => $product->id)) }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit recipe</a></p>
 	    </div>
 	</div>
 

@@ -5,41 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\Product;
-use DB;
-use Response;
+use App\Hour;
+use Redirect;
 
-class MetricsController extends Controller
+class HoursController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function orders()
+    public function index()
     {
-        $measure = DB::table('orders')
-             ->select(DB::raw('SUM(transaction_total) as dayTotal, COUNT(id) as numberTransaction, dateOrdered'))
-             ->where('status_id', '>', 1)
-             ->groupBy('dateOrdered')
-             ->get();
-
-        // return $measure;
-
-        return view('metrics.orders', ['measure' => $measure]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function inventory()
-    {
-        $measurementHeading = "Product inventory quantities";
-        $measure = Product::all();
-        return view('metrics.inventory', ['measure' => $measure, 'measurementHeading' => $measurementHeading]);
+        $hours = Hour::all();
+        return view('hours.index', ['hours' => $hours]);
     }
 
     /**
@@ -82,7 +61,8 @@ class MetricsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hour = Hour::find($id);
+        return view('hours.edit', ['hour'=>$hour]);
     }
 
     /**
@@ -94,7 +74,14 @@ class MetricsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = $request->id;
+        $hour = Hour::find($id);
+        $hour->hours = $request->hours;
+        $hour->save();
+
+        $request->session()->flash('status', 'Store hours were successfully updated.');
+
+        return Redirect::action('HoursController@index');
     }
 
     /**

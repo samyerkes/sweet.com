@@ -32,6 +32,14 @@ class AppServiceProvider extends ServiceProvider
           $view->with('orders', $orders);
         });
 
+        view()->composer('sidebar.admin', function($view){
+          $today = date('l');
+          $hours = DB::table('hours')
+                        ->where('day', $today)
+                        ->value('hours');
+          $view->with('hours', $hours);
+        });
+
             view()->composer('*', function($view) use ($auth){
                 $user = Auth::user();
                 if(Auth::user()) {

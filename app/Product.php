@@ -23,4 +23,12 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Order', 'order_products')->withPivot('quantity');
     }
+
+    /**
+     * The ingredients of the products
+     */
+    public function ingredient()
+    {
+        return $this->belongsToMany('App\Ingredient', 'recipes')->withPivot('id', 'quantity');
+    }
 }

@@ -7,7 +7,7 @@
 		</div>
 		<div class="panel-body">
 			<strong>Role:</strong> {{ $user->role->role }}<br />
-			<strong>User since :</strong> {{ $user->created_at }}<br />
+			<strong>User since :</strong> {{ date('F d, Y', strtotime($user->created_at)) }}<br />
 	    </div>
 	</div>
 
