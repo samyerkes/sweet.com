@@ -111,6 +111,7 @@ class CartController extends Controller
 
         $user = Auth::User();
 
+        // return view('email.submitorder', ['order' => $order, 'user' => $user, 'items'=>$items]);
         Mail::send('email.submitorder', ['order' => $order, 'user' => $user, 'items'=>$items], function ($m) use ($order) {
             $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
             $m->to('samuelyerkes@gmail.com', 'Sam')->subject('Thank you for your order!');

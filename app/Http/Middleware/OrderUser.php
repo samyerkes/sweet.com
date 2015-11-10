@@ -22,10 +22,10 @@ class OrderUser
         $order_id = $request->segments()[1];
         $orderUser = Order::find($order_id)->user->id;
 
-        if ($orderUser != Auth::user()->id)
-        {
-            return redirect('profile')->with('danger', 'This order is not associated with you.');
-        }
+        // if ($orderUser != Auth::user()->id)
+        // {
+        //     return redirect('profile')->with('danger', 'This order is not associated with you.');
+        // }
         return $next($request);
     }
 }

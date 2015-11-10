@@ -18,12 +18,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
+        $date =  date('Y-m-d');
+        $shift = Shift::where('date', $date)->pluck('id');
+        $users = Shift::find($shift)->users()->get();
 
-        $shift = Shift::all()->where('date', date('Y-m-d'));
-
-        $users = User::all()->where('shift_id', $shift);
-
-        return $users;
+        return view('shifts.index', ['users' => $users]);
 
         
     }

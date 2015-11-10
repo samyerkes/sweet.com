@@ -68,6 +68,14 @@
                         </div>
                     @endif
 
+                    @if (count($errors))
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+
     				@yield('content')
     			</div>
     			<div class="col-md-4">

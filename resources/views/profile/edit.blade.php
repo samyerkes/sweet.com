@@ -23,6 +23,21 @@
     		{!! Form::text('email', $user->email, array('class' => 'form-control', 'placeholder'=>$user->email)); !!}
 		</div>	
 
+        <div class="form-group">
+            {!! Form::label('password', 'Old password'); !!}
+            {!! Form::text('password', null, array('class' => 'form-control', 'placeholder'=>'Old password')); !!}
+        </div>  
+
+        <div class="form-group">
+            {!! Form::label('confirm_password', 'Confirm old password'); !!}
+            {!! Form::text('confirm_password', null, array('class' => 'form-control', 'placeholder'=>'Confirm old password')); !!}
+        </div>  
+
+        <div class="form-group">
+            {!! Form::label('new_password', 'New password'); !!}
+            {!! Form::text('new_password', null, array('class' => 'form-control', 'placeholder'=>'New password')); !!}
+        </div>  
+
 		{!! Form::submit('Update', array('class'=>'btn btn-success')); !!}
 
 	{!! Form::close() !!}
