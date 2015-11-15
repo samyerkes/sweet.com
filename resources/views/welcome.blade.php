@@ -2,7 +2,7 @@
 @section('content')
     <div class="jumbotron">
     	<h1>Welcome</h1>
-    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat fugit facilis, saepe. Fuga dicta quam laboriosam cupiditate repellendus in repudiandae inventore ducimus expedita iusto veritatis iste libero, animi, assumenda fugiat delectus dignissimos eligendi nesciunt quisquam at! Debitis fuga fugiat, ex, dolorem magni iure culpa deserunt repellendus molestias at ad.</p>
+    	<p>Welcome to Sweet Sweet Chocolates where your sweet tooth can be appeased... We offer a variety of delectable chocolate delicacies and we're sure you'll find the candies you desire.</p>
     	<a href="#" class="btn btn-primary btn-lg">Call to action</a>
     </div>
 @endsection

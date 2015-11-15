@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
 	    Route::resource('profile/address', 'AddressController', ['only' => ['show', 'edit','update','destroy']]);
 	});
 	
+	Route::get('/admin/schedule/create/{id}', [
+	    'as' => 'admin.schedule.create', 'uses' => 'ScheduleController@create'
+	]);
 	Route::resource('admin/schedule', 'ScheduleController');
 
 	Route::group(['middleware' => 'admin'], function() {

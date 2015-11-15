@@ -8,6 +8,7 @@ use DB;
 use View;
 use Auth;
 use App\Order;
+use App\Shift;
 use Illuminate\Contracts\Auth\Guard;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +39,13 @@ class AppServiceProvider extends ServiceProvider
                         ->where('day', $today)
                         ->value('hours');
           $view->with('hours', $hours);
+        });
+
+        view()->composer('sidebar.admin', function($view){
+          $date =  date('Y-m-d');
+          $shift = Shift::where('date', $date)->pluck('id');
+          $employeees = Shift::find($shift)->users()->count();
+          $view->with('employeees', $employeees);
         });
 
             view()->composer('*', function($view) use ($auth){

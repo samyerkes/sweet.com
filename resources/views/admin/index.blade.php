@@ -28,23 +28,28 @@
         </div>
         
         
-        @if ($currentUser->role->id == 1)
+        
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Users</div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ route('admin.users.index') }}">All users</a></li>
-                        <li class="list-group-item"><a href="#">Employee schedule</a></li>
+                        @if ($currentUser->role->id == 1)
+                            <li class="list-group-item"><a href="{{ route('admin.users.index') }}">All users</a></li>
+                        @endif
+                        <li class="list-group-item"><a href="{{ route('admin.schedule.index')}}">Employee schedule</a></li>
                     </ul>
                 </div>
 
+            @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
                     <div class="panel-heading">Store</div>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{ route('admin.hours.index') }}">Hours</a></li>
                     </ul>
                 </div>
-
+            @endif
+            
+            @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">
@@ -52,8 +57,9 @@
                         <li class="list-group-item"><a href="{{ route('admin.metrics.inventory') }}">Product inventory</a></li>
                     </ul>
                 </div>
+            @endif
             </div>
-        @endif
+        
 
     </div>
 

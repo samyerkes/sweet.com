@@ -2,7 +2,7 @@
 
 @section('content')
 	
-	<h1>Edit user's shift</h1>
+	<h1>Add user shift</h1>
 
     {!! Form::open(array('action' => 'ScheduleController@update', $shift->id, 'method' => 'PUT')) !!}
 

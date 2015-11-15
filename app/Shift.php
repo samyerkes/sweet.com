@@ -11,6 +11,6 @@ class Shift extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_shifts', 'shift_id', 'user_id')->withPivot('start_time', 'end_time');
+        return $this->belongsToMany('App\User', 'user_shifts', 'shift_id', 'user_id')->withPivot('id', 'start_time', 'end_time');
     }
 }

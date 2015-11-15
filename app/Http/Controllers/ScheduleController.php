@@ -7,7 +7,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Shift;
+use App\UserShift;
 use DB;
+use Redirect;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -18,12 +21,12 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $date =  date('Y-m-d');
-        $shift = Shift::where('date', $date)->pluck('id');
-        $users = Shift::find($shift)->users()->get();
+        $startDate = Carbon::now()->format('Y-m-d');
+        $endDate = Carbon::now()->addWeek()->format('Y-m-d');
+        $shift = Shift::whereBetween('date', [$startDate, $endDate])->get();
+        // $users = Shift::find($shift->id)->users()->get();
 
-        return view('shifts.index', ['users' => $users]);
-
+        return view('shifts.index', ['shift' => $shift]);
         
     }
 
@@ -32,9 +35,11 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $users = User::where('role_id', '<', '3')->get();
+        $shift = Shift::find($id);
+        return view('shifts.create', ['users' => $users, 'shift' => $shift]);
     }
 
     /**
@@ -43,9 +48,17 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $shift = UserShift::find($id);
+        $shift->user_id = $request->user;
+        $shift->start_time = $request->start_time;
+        $shift->end_time = $request->end_time;
+        $shift->save();
+
+        $request->session()->flash('status', 'Employee was successfully saved.');
+
+        return Redirect::action('ScheduleController@index');
     }
 
     /**
@@ -67,7 +80,9 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::where('role_id', '<', '3')->get();
+        $shift = Shift::find($id);
+        return view('shifts.edit', ['users' => $users, 'shift' => $shift]);
     }
 
     /**
@@ -79,7 +94,16 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $shift = new UserShift;
+        $shift->shift_id = $request->id;
+        $shift->user_id = $request->user;
+        $shift->start_time = $request->start_time;
+        $shift->end_time = $request->end_time;
+        $shift->save();
+
+        $request->session()->flash('status', 'Employee was successfully saved.');
+
+        return Redirect::action('ScheduleController@index');
     }
 
     /**
@@ -90,6 +114,8 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shift = UserShift::find($id);
+        $shift->delete();
+        return Redirect::action('ScheduleController@index')->with('status', 'Employee shift was successfully updated.');
     }
 }
