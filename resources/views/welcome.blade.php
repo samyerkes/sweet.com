@@ -3,7 +3,6 @@
     <div class="jumbotron">
     	<h1>Welcome</h1>
     	<p>Welcome to Sweet Sweet Chocolates where your sweet tooth can be appeased... We offer a variety of delectable chocolate delicacies and we're sure you'll find the candies you desire.</p>
-    	<a href="#" class="btn btn-primary btn-lg">Call to action</a>
     </div>
 @endsection
 
