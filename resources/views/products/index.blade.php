@@ -10,6 +10,7 @@
 	    	<thead>
 	    		<th>ID</th>
 		    	<th>Name</th>
+		    	<th>Category</th>
 		    	<th>Price</th>
 		    	<th>Quantity</th>
 	    	</thead>
@@ -17,6 +18,7 @@
 	    		<tr>
 	    			<td><a href="{{ route('admin.products.show', array('id' => $p->id)) }}">{{ $p->id }}</a></td>
 		    		<td>{{ $p->name }}</td>
+		    		<td>{{ $p->category->name }}</td>
 		    		<td>${{ $p->price }}</td>
 		    		<td>{{ $p->inventory }}</td>
 		    	</tr>

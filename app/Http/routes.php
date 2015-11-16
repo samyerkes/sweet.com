@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('products', [
+Route::get('products/{category?}', [
     'as' => 'product.listing', 'uses' => 'ProductController@publicListing'
 ]);
-Route::get('products/{products}', [
+Route::get('products/item/{products}', [
     'as' => 'product.item', 'uses' => 'ProductController@publicShow'
 ]);
 
@@ -74,6 +74,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('/admin/recipe', 'RecipeController');
 
+		Route::resource('/admin/category', 'CategoryController');
+
 		Route::resource('/admin/hours', 'HoursController');
 
 		Route::get('/admin/metrics/orders', ['as'=>'admin.metrics.orders', 'uses' => 'MetricsController@orders']);
@@ -85,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/admin/orders/pending', ['as' => 'admin.orders.pending', 'uses' => 'OrderController@pending']);
 		Route::get('/admin/orders/completed', ['as' => 'admin.orders.completed', 'uses' => 'OrderController@completed']);
 		Route::resource('/admin/orders', 'OrderController');
+		Route::post('admin/orders', ['as' => 'admin.orders.employeestore', 'uses' => 'OrderController@employeeStore']);
 
 	});
 	

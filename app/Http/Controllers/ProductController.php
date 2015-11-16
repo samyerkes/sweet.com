@@ -9,6 +9,7 @@ use App\Product;
 use App\Order;
 use Storage;
 use DB;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -17,11 +18,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function publicListing()
+    public function publicListing($category = null)
     {
-        $products = Product::all();
-
-        return view('products.public', ['products' => $products]);
+        if($category) {
+            $products = Product::where('category_id', $category)->get();
+            $category = Category::find($category);
+            $category = $category->name;
+        } else {
+            $products = Product::all();
+            $category = 'All products';
+        }
+        
+        return view('products.public', ['products' => $products, 'category'=>$category]);
     }
 
     /**
@@ -69,7 +77,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create', ['categories'=>$categories]);
     }
 
     /**
@@ -87,6 +96,7 @@ class ProductController extends Controller
             'Description' => 'required',
             'Image' => 'required',
             'Quantity' => 'required',
+            'Category' => 'required',
         ]);
 
         $product = new Product;
@@ -94,6 +104,7 @@ class ProductController extends Controller
         $product->price = $request->Price;
         $product->description = $request->Description;
         $product->inventory = $request->Quantity;
+        $product->category_id = $request->Category;
         $product->save();
 
         $extension = $request->file('Image')->getClientOriginalExtension();
@@ -134,7 +145,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('products.edit', ['product' => $product]);
+        $categories = Category::all();
+        return view('products.edit', ['product' => $product, 'categories'=>$categories]);
     }
 
     /**
@@ -153,6 +165,7 @@ class ProductController extends Controller
         $product->price = $request->Price;
         $product->description = $request->Description;
         $product->inventory = $request->Quantity;
+        $product->category_id = $request->Category;
         $product->save();
 
         if(!empty($request->file('Image'))) {

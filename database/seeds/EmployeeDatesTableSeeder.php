@@ -11,7 +11,7 @@ class EmployeeDatesTableSeeder extends Seeder
      */
     public function run()
     {
-    	foreach (range(1, 365) as $i)
+    	foreach (range(0, 365) as $i)
         {
             $date = \Carbon\Carbon::now()->addDay($i);
             if (\Carbon\Carbon::now()->addDay($i)->isWeekend()) {

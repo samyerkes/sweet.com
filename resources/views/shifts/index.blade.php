@@ -26,12 +26,26 @@
 						<td>{{ date('g:i a', strtotime($u->pivot->start_time)) }}</td>
 						<td>{{ date('g:i a', strtotime($u->pivot->end_time)) }}</td>
 						@if ($currentUser->role->id == 1)
-							<td class="hidden-xs">
-								{!! Form::open(['route' => ['admin.schedule.destroy', $u->pivot->id], 'method' => 'delete']) !!}
-		                            {!! Form::submit('Delete', ['class'=>'btn btn-danger pull-right btn-xs hidden-xs']) !!}
-		                        {!! Form::close() !!}
-							</td>
-						@endif
+							<td><button type="button" class="btn btn-danger pull-right btn-xs" data-toggle="modal" data-target="#modal{{$u->pivot->id}}">Remove</button>
+	                        <div class="modal fade" id="modal{{$u->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="modal{{$u->pivot->id}}Label">
+	                          <div class="modal-dialog" role="document">
+	                            <div class="modal-content">
+	                              <div class="modal-header">
+	                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                                <h4 class="modal-title" id="modal{{$u->pivot->id}}Label">Are you sure you want to remove this user from this shift?</h4>
+	                              </div>
+	                              <div class="modal-footer">
+	                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                                <style>form{display:inline;}</style>
+	                                {!! Form::open(['route' => ['admin.schedule.destroy', $u->pivot->id], 'method' => 'delete']) !!}
+			                            {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+			                        {!! Form::close() !!}
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </div>
+	                    </td>
+	                 @endif
 					</tr>
 				@endforeach	
 		</table>

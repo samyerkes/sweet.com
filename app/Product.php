@@ -31,4 +31,12 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Ingredient', 'recipes')->withPivot('id', 'quantity');
     }
+
+    /**
+     * The category of the products
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

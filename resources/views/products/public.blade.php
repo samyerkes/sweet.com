@@ -1,7 +1,9 @@
 @extends('base')
 
 @section('content')
-    <h1>Products</h1>
+    <h1>
+        {{ $category }}
+    </h1>
     <div class="row">
     @foreach ($products as $index => $product)
             <div class="col-xs-6 col-md-3">

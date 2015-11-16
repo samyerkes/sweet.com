@@ -9,6 +9,8 @@ use View;
 use Auth;
 use App\Order;
 use App\Shift;
+use App\Product;
+use App\Category;
 use Illuminate\Contracts\Auth\Guard;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,6 +48,11 @@ class AppServiceProvider extends ServiceProvider
           $shift = Shift::where('date', $date)->pluck('id');
           $employeees = Shift::find($shift)->users()->count();
           $view->with('employeees', $employeees);
+        });
+
+        view()->composer('sidebar.special', function($view){
+          $categories = Category::all();
+          $view->with('categories', $categories);
         });
 
             view()->composer('*', function($view) use ($auth){

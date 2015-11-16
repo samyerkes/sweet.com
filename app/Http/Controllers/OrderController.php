@@ -9,6 +9,7 @@ use App\Order;
 use App\Product;
 use App\OrderProduct;
 use Redirect;
+use App\User;
 
 class OrderController extends Controller
 {
@@ -52,7 +53,49 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $products = Product::all();
+        $users = User::orderBy('lname')->get();
+        return view('orders.create', ['products'=>$products, 'users'=>$users]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function employeeStore(Request $request)
+    {
+        $order = new Order;
+        $order->user_id = $request->user;
+        $order->status_id = 2; //make status pending
+        $order->dateOrdered = \Carbon\Carbon::now();
+        $order->address = 'xxxAddress';
+        $order->payment = $request->number;
+        $order->transaction_total = '10.00';
+        $order->save();
+
+        $products = Product::all();
+
+        // $orderprod = [];
+        // $quantity = $request->quantity; //here name is the name of your form's name[] field
+        // foreach($quantity as $q) {
+        //     $orderprod[] = $q;
+        // }
+        // return $orderprod;
         
+        $orderprod = [];
+        $quantity = $request->quantity; //here name is the name of your form's name[] field
+        foreach($quantity as $q) {
+            if($q) {
+
+                $orderprod[] = $q;
+            }
+        }
+
+        return $orderprod;
+        
+        // return view('products.index', ['products' => $products]);
     }
 
     /**

@@ -36,6 +36,15 @@
 			{!! Form::file('Image') !!}
 		</div>
 
+		<div class="form-group">
+	        {!! Form::label('Category', 'Product category'); !!}
+	        <select name="Category" class="form-control">
+	            @foreach ($categories as $c)
+	                <option value="{{ $c->id }}">{{ $c->name }}</option>
+	            @endforeach
+	        </select>
+	    </div>
+
 	    <div class="form-group">
 			{!! Form::label('Quantity', 'Quantity'); !!}
 	    	{!! Form::number('Quantity', null, array('class' => 'form-control', 'placeholder'=>'Quantity')); !!}

@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Role;
+use App\Category;
 use Redirect;
-use Hash;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $users = App\Role::find(3)->users;
-        // return $users;
-
-        $users = User::all();
-        return view('users.index', ['users' => $users]);
+        $categories = Category::all();
+        return view('category.index', ['categories' => $categories]);
     }
 
     /**
@@ -33,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('category.create');
     }
 
     /**
@@ -44,17 +39,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        $user->fname = $request->fname;
-        $user->lname = $request->lname;
-        $user->email = $request->email;
-        $user->role_id = $request->role;
-        $user->password = Hash::make('sweetsweetchocolate');
-        $user->save();
+        $address = new Category;
+        $address->name = $request->name;
+        $address->save();
 
-        $request->session()->flash('status', 'User was successfully created.');
+        $request->session()->flash('status', 'Product category was successfully saved.');
 
-        return Redirect::action('UserController@index');
+        return Redirect::action('CategoryController@index');
     }
 
     /**
@@ -65,8 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('users.show', ['user' => $user]);
+        //
     }
 
     /**
@@ -77,8 +67,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('users.edit', ['user' => $user]);
+        $category = Category::find($id);
+        return view('category.edit', ['category'=>$category]);
     }
 
     /**
@@ -90,17 +80,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->fname = $request->fname;
-        $user->lname = $request->lname;
-        $user->email = $request->email;
-        $user->role_id = $request->role;
-        $user->save();
+        $id = $request->id;
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
 
-        $request->session()->flash('status', 'User information was successfully updated.');
+        $request->session()->flash('status', 'Product category was successfully updated.');
 
-        $users = User::all();
-        return view('users.index', ['users' => $users]);
+        return Redirect::action('CategoryController@index');
     }
 
     /**
@@ -111,6 +98,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return Redirect::action('CategoryController@index')->with('status', 'Product category was successfully updated.');
     }
 }

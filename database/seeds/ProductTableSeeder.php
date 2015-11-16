@@ -17,6 +17,7 @@ class ProductTableSeeder extends Seeder
             'description' => 'The finest chocolates from Berlin, Germany.',
             'inventory' => '30',
             'created_at' => '2015-02-08 04:11:02',
+            'category_id' => '1',
         ]);
         DB::table('products')->insert([
             'name' => 'Swiss chocolate',
@@ -24,6 +25,7 @@ class ProductTableSeeder extends Seeder
             'description' => 'The finest chocolates from Australia, Swizterland.',
             'inventory' => '10',
             'created_at' => '2015-03-08 04:11:02',
+            'category_id' => '1',
         ]);
         DB::table('products')->insert([
             'name' => 'LoLo Pops',
@@ -31,6 +33,7 @@ class ProductTableSeeder extends Seeder
             'description' => 'Colorful fun pops. Great for kids and adults alike.',
             'inventory' => '12',
             'created_at' => '2015-03-08 04:11:02',
+            'category_id' => '3',
         ]);
         DB::table('products')->insert([
             'name' => 'SamSams',
@@ -38,6 +41,7 @@ class ProductTableSeeder extends Seeder
             'description' => 'Fudgy pudgy wanna be rich chocolates',
             'inventory' => '9',
             'created_at' => \Carbon\Carbon::now(),
+            'category_id' => '1',
         ]);
         DB::table('products')->insert([
             'name' => 'Kaylyn\'s Homemade Cookies',
@@ -45,6 +49,7 @@ class ProductTableSeeder extends Seeder
             'description' => 'Kaylyn\'s famous chocolate chip and fudge cookies',
             'inventory' => '40',
             'created_at' => '2015-09-08 04:11:02',
+            'category_id' => '3',
         ]);
     }
 }

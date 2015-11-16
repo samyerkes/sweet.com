@@ -44,7 +44,7 @@
 			@foreach ($orders as $order)
 				<tr>
 					<td><a href="{{ route('admin.orders.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
-					<td>{{ $order->user->fname }} {{ $order->user->lname }}</td>
+					{{-- <td>{{ $order->user->fname }} {{ $order->user->lname }}</td> --}}
 					<td>{{ $order->dateOrdered }}</td>
 					<td>
 						@if ( $order->status_id == 1)
