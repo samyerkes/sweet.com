@@ -19,9 +19,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $users = App\Role::find(3)->users;
-        // return $users;
-
         $users = User::all();
         return view('users.index', ['users' => $users]);
     }

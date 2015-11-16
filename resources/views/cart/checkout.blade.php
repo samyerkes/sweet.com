@@ -62,7 +62,23 @@
         </select>
     </div>
 
-    {!! Form::submit('Submit order', ['class'=>'btn btn-primary btn-lg pull-right']) !!}
+    <button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#modal">Submit order</button>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalLabel">Are you sure you want to submit this order?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <style>form{display:inline;}</style>
+            {!! Form::submit('Submit order', ['class'=>'btn btn-success']) !!}
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     {!! Form::close() !!}
     

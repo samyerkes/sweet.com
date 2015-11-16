@@ -21,13 +21,12 @@
 			<div class="panel-body">
 				<style>.form-inline {margin: 10px 0; width:100% !important;}</style>
 				@foreach ($products as $p)
-					{!! Form::hidden('id[]', $p->id) !!}
 					<div class="form-inline">
 					  <div class="form-group">
-					    {!! Form::label('quantity[]'.$p->id, $p->name, ['class'=>'sr-only']); !!}
+					  	<label for="quantity{{ $p->id }}" class="sr-only">{{ $p->name }}</label>
 					    <div class="input-group">
 					      <div class="input-group-addon"><a href="{{ route('product.item', array('id' => $p->id)) }}">{{ $p->name }}</a></div>
-					      {!! Form::text('quantity[]', null, array('class' => 'form-control', 'placeholder'=>'$'. $p->price)); !!}
+					      <input type="text" name="quantity{{$p->id}}" class="form-control" placeholder="${{$p->price}}">
 					    </div>
 					  </div>
 					</div>
@@ -36,8 +35,8 @@
 		</div>
 
 		<div class="form-group">
-    		{!! Form::label('number', 'Credit card number'); !!}
-    		{!! Form::number('number', null, array('class' => 'form-control', 'placeholder'=>'XXXX-XXXX-XXXX-XXXX')); !!}
+    		{!! Form::label('payment', 'Credit card number'); !!}
+    		{!! Form::number('payment', null, array('class' => 'form-control', 'placeholder'=>'XXXX-XXXX-XXXX-XXXX')); !!}
 		</div>
     	
 		{!! Form::submit('Submit order', array('class'=>'btn btn-success pull-right')); !!}

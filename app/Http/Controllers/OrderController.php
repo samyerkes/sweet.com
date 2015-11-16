@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function pending()
     {
-        $orders = Order::where('status_id', '=', 2)->get();
+        $orders = Order::where('status_id', 2)->get();
         return view('orders.pending', ['orders' => $orders]);
     }
 
@@ -66,36 +66,46 @@ class OrderController extends Controller
      */
     public function employeeStore(Request $request)
     {
+        $this->validate($request, [
+            'user' => 'required',
+            'payment' => 'required',
+        ]);
+
         $order = new Order;
         $order->user_id = $request->user;
         $order->status_id = 2; //make status pending
         $order->dateOrdered = \Carbon\Carbon::now();
-        $order->address = 'xxxAddress';
-        $order->payment = $request->number;
-        $order->transaction_total = '10.00';
+        $order->address = 'xxxAddress'; // temporary
+        $order->payment = $request->payment;
+        // $order->transaction_total = '10.00'; // temporary
         $order->save();
 
         $products = Product::all();
 
-        // $orderprod = [];
-        // $quantity = $request->quantity; //here name is the name of your form's name[] field
-        // foreach($quantity as $q) {
-        //     $orderprod[] = $q;
-        // }
-        // return $orderprod;
-        
-        $orderprod = [];
-        $quantity = $request->quantity; //here name is the name of your form's name[] field
-        foreach($quantity as $q) {
-            if($q) {
-
-                $orderprod[] = $q;
+        foreach($products as $p) {
+            if($request->input('quantity'.$p->id) > 0) {
+                $orderProduct = new OrderProduct;
+                $orderProduct->order_id = $order->id;
+                $orderProduct->product_id = $p->id;
+                $orderProduct->quantity = $request->input('quantity'.$p->id);
+                $orderProduct->save();
             }
         }
 
-        return $orderprod;
+        $items = $order->product()->get();
+
+        $sum = 0;
+        foreach($items as $item) {
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+        }
+
+        $order = Order::find($order->id);
+        $order->transaction_total = $sum;
+        $order->save();
+
+        $request->session()->flash('status', 'Order has been submitted');
         
-        // return view('products.index', ['products' => $products]);
+        return Redirect::action('OrderController@create');
     }
 
     /**
