@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
           $today = \Carbon\Carbon::today();
           $orders = DB::table('orders')
                         ->where('dateOrdered', '=', $today)
-                        ->where('status_id', '=', 2)
+                        ->where('status_id', '>', 1)
                         ->count('id');
           $view->with('orders', $orders);
         });
