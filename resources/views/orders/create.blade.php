@@ -9,7 +9,7 @@
 		<div class="form-group">
 	        {!! Form::label('user', 'Customer'); !!}
 	        <select name="user" class="form-control">
-	        	<option value="9999">-- Guest --</option>
+	        	<option value="1">-- Guest --</option>
 	            @foreach ($users as $u)
 	                <option value="{{ $u->id }}">{{ $u->lname }}, {{ $u->fname}}</option>
 	            @endforeach
