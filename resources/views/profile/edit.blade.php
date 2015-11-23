@@ -4,6 +4,8 @@
 		
 	<h1>Edit Profile</h1>
 
+    {!! Breadcrumbs::render('profile.edit', $user) !!}
+
     {!! Form::open(array('action' => 'ProfileController@update', $user->id, 'method' => 'PUT')) !!}
 
 		{!! Form::hidden('id', $user->id) !!}

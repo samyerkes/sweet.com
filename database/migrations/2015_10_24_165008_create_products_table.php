@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->decimal('price', 5, 2);
             $table->longText('description');
+            $table->longText('recipe');
             $table->integer('inventory');
             $table->softDeletes();
             $table->timestamps();

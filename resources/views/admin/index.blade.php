@@ -26,6 +26,15 @@
                         <li class="list-group-item"><a href="#">Manage reviews</a></li>
                     </ul>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Supplies</div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{ route('admin.ingredient.index') }}">Manage ingredients</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.supplier.index') }}">Suppliers information</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.supplyorder.index') }}">Make supply order</a></li>
+                    </ul>
+                </div>
             @endif
         </div>
         
@@ -36,7 +45,6 @@
                     <div class="panel-heading">Users</div>
                     <ul class="list-group">
                         @if ($currentUser->role->id == 1)
-                            <li class="list-group-item"><a href="{{ route('admin.users.create') }}">Create user</a></li>
                             <li class="list-group-item"><a href="{{ route('admin.users.index') }}">All users</a></li>
                         @endif
                         <li class="list-group-item"><a href="{{ route('admin.schedule.index')}}">Employee schedule</a></li>
@@ -56,8 +64,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">
+                        <li class="list-group-item"><a href="{{ route('admin.metrics.users') }}">User metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.orders') }}">Transaction metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.inventory') }}">Product inventory</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.metrics.supply') }}">Supply inventory</a></li>
                     </ul>
                 </div>
             @endif

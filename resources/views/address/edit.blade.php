@@ -1,9 +1,10 @@
 @extends('base')
 
 @section('content')
-	
-		
+			
 	<h1>Edit address</h1>
+
+	{!! Breadcrumbs::render('profile.address.edit', $user) !!}
 
     {!! Form::open(array('action' => 'AddressController@update', $address->id, 'method' => 'PUT')) !!}
 

@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('profile.address.index', $user) !!}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $user->fname }}'s default addresses <a href="{{ route('profile.address.create') }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>

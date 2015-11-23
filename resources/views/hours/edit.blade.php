@@ -1,10 +1,11 @@
 @extends('base')
 
 @section('content')
-	
 		
 	<h1>Edit {{ $hour->day }}'s hours</h1>
 
+	{!! Breadcrumbs::render('admin.hours.edit', $hour) !!}
+    
     {!! Form::open(array('action' => 'HoursController@update', $hour->id, 'method' => 'PUT')) !!}
 
 		{!! Form::hidden('id', $hour->id) !!}

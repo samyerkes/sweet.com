@@ -30,6 +30,7 @@
     			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
     				<ul class="nav navbar-nav">
     					<li><a href="{{ route('product.listing') }}">Products</a></li>
+                        <li><a href="{{ route('hours.publicIndex') }}">Store Hours</a></li>
     					@if (Auth::check())
                             <li><a href="{{ route('profile.index') }}">Profile</a></li>
                             <li><a href="{{ route('auth.logout') }}">Logout</a></li>

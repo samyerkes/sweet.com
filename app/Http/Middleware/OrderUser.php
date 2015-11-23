@@ -19,13 +19,11 @@ class OrderUser
      */
     public function handle($request, Closure $next)
     {
-        $order_id = $request->segments()[1];
-        $orderUser = Order::find($order_id)->user->id;
+        $orderUser = $request->user();
 
-        // if ($orderUser != Auth::user()->id)
-        // {
-        //     return redirect('profile')->with('danger', 'This order is not associated with you.');
-        // }
+        if ($orderUser->id != Auth::user()->id) {
+            return redirect('profile')->with('danger', 'This order is not associated with you.');
+        }
         return $next($request);
     }
 }

@@ -13,19 +13,27 @@ class IngredientTableSeeder extends Seeder
     {
         DB::table('ingredients')->insert([
             'name' => 'Sugar',
-            'supplier' => 'Kroger',
+            'supplier_id' => '1',
+            'unit' => 'Cups',
+            'quantity' => '300'
         ]);
         DB::table('ingredients')->insert([
             'name' => 'Chocolate chips',
-            'supplier' => 'Food Lion',
+            'supplier_id' => '2',
+            'unit' => 'Tablespoons',
+            'quantity' => '300'
         ]);
         DB::table('ingredients')->insert([
             'name' => 'Milk',
-            'supplier' => 'Kim\'s Cow Farm',
+            'supplier_id' => '3',
+            'unit' => 'Cups',
+            'quantity' => '400'
         ]);
         DB::table('ingredients')->insert([
             'name' => 'Butter',
-            'supplier' => 'Kroger',
+            'supplier_id' => '1',
+            'unit' => 'Sticks',
+            'quantity' => '40'
         ]);
     }
 }

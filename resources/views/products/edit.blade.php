@@ -2,6 +2,9 @@
 
 @section('content')
 	<h1>Edit Product</h1>
+	
+	{!! Breadcrumbs::render('admin.products.edit', $product) !!}
+
 	{!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.products.update', $product->id ], 'id'=>'myform', 'files' => true ]) !!}
 
     		{!! Form::hidden('id', $product->id) !!}

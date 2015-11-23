@@ -1,7 +1,9 @@
 @extends('base')
 
 @section('content')
-	<h1>Create new User</h1>
+	<h1>Create new user</h1>
+
+	{!! Breadcrumbs::render('admin.users.create') !!}
 
     {!! Form::open(array('action' => 'UserController@store')) !!}
 

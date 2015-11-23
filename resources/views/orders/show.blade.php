@@ -2,6 +2,8 @@
 
 @section('content')
 
+	{!! Breadcrumbs::render('admin.orders.show', $order) !!}
+
 	@if ($order->status->id == 2)
 		<div class="panel panel-warning">
 	@elseif ($order->status->id == 3)

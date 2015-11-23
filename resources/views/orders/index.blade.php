@@ -1,6 +1,8 @@
 @extends('base')
 
 @section('content')
+	
+	{!! Breadcrumbs::render('admin.orders.index') !!}
 
 	<div class="panel panel-default">
 		<div class="panel-heading">

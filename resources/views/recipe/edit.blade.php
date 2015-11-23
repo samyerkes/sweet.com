@@ -1,37 +1,21 @@
 @extends('base')
 
 @section('content')
-	
 		
-	<h1>Edit address</h1>
+	<h1>Edit product recipe</h1>
 
-    {!! Form::open(array('action' => 'AddressController@update', $address->id, 'method' => 'PUT')) !!}
+	{!! Breadcrumbs::render('admin.recipe.edit', $product) !!}
 
-		{!! Form::hidden('id', $address->id) !!}
+    {!! Form::open(array('action' => 'AddressController@update', $product->id, 'method' => 'PUT')) !!}
+
+		{!! Form::hidden('id', $product->id) !!}
 
     	<div class="form-group">
-    		{!! Form::label('name', 'Name'); !!}
-    		{!! Form::text('name', $address->name, array('class' => 'form-control', 'placeholder'=>$address->name)); !!}
-		</div>
-
-		<div class="form-group">
-    		{!! Form::label('street', 'Street'); !!}
-    		{!! Form::text('street', $address->street, array('class' => 'form-control', 'placeholder'=>$address->street)); !!}
-		</div>
-
-		<div class="form-group">
-    		{!! Form::label('city', 'City'); !!}
-    		{!! Form::text('city', $address->city, array('class' => 'form-control', 'placeholder'=>$address->city)); !!}
-		</div>
-
-		<div class="form-group">
-    		{!! Form::label('state', 'State'); !!}
-    		@include('partials.states')
-		</div>
-
-		<div class="form-group">
-    		{!! Form::label('zip', 'Zip code'); !!}
-    		{!! Form::text('zip', $address->zip, array('class' => 'form-control', 'placeholder'=>$address->zip)); !!}
+			{!! Form::label('Recipe', 'Recipe'); !!}
+			@include('partials.quill-open')
+				{!! $product->recipe !!}
+			@include('partials.quill-close')
+			{!! Form::hidden('Recipe', 'Recipe', array('id' => 'quill')) !!}
 		</div>
 
 		{!! Form::submit('Update', array('class'=>'btn btn-success')); !!}
@@ -41,5 +25,5 @@
 @endsection
 
 @section('sidebar')
-    @include('sidebar.special')
+    @include('sidebar.admin')
 @endsection

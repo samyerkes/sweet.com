@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('admin.category.index') !!}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             All product categories <a href="{{ route('admin.category.create') }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New</a>

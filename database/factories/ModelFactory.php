@@ -25,8 +25,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
     return [
         'user_id' => $faker->numberBetween($min = 3, $max = 27),
-        'dateOrdered' => $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now'),
         'status_id' => $faker->numberBetween($min = 1, $max = 3),
+        'dateOrdered' => $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now'),
         'address' => $faker->address(),
         'payment' => $faker->creditCardNumber(),
         'transaction_total' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 100),

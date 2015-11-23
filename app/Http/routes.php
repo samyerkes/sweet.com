@@ -14,15 +14,18 @@
 // $user = User::find(10)->role->toArray();
 // return $user;
 
-Route::get('/', function () {
+Route::get('/', ['as'=>'home', function () {
     return view('welcome');
-});
+}]);
 
 Route::get('products/{category?}', [
     'as' => 'product.listing', 'uses' => 'ProductController@publicListing'
 ]);
 Route::get('products/item/{products}', [
     'as' => 'product.item', 'uses' => 'ProductController@publicShow'
+]);
+Route::get('hours', [
+    'as' => 'hours.publicIndex', 'uses' => 'HoursController@publicIndex'
 ]);
 
 // Authentication
@@ -72,7 +75,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('/admin/users', 'UserController');
 
+		Route::resource('/admin/ingredient', 'IngredientController');
+		Route::resource('/admin/supplier', 'SupplierController');
+		Route::resource('/admin/supplyorder', 'SupplyOrderController');
 		Route::resource('/admin/recipe', 'RecipeController');
+		Route::get('/admin/recipe/{product}/ingredient/add', ['as'=>'admin.recipe.ingredient.add', 'uses' => 'IngredientController@add']);
+		Route::post('/admin/recipe/{product}/ingredient', ['as'=>'admin.recipe.ingredient.storeAdd', 'uses' => 'IngredientController@AddStore']);
 
 		Route::resource('/admin/category', 'CategoryController');
 
@@ -80,6 +88,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/admin/metrics/orders', ['as'=>'admin.metrics.orders', 'uses' => 'MetricsController@orders']);
 		Route::get('/admin/metrics/inventory', ['as'=>'admin.metrics.inventory', 'uses' => 'MetricsController@inventory']);
+		Route::get('/admin/metrics/supply', ['as'=>'admin.metrics.supply', 'uses' => 'MetricsController@supply']);
+		Route::get('/admin/metrics/users', ['as'=>'admin.metrics.users', 'uses' => 'MetricsController@users']);
 
 		Route::get('/admin/products/low', ['as' => 'admin.products.low', 'uses' => 'ProductController@lowInventory']);		
 		Route::resource('admin/products', 'ProductController');

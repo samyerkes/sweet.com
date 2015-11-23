@@ -147,6 +147,8 @@ return [
 
         'Collective\Html\HtmlServiceProvider',
 
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+
         Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
@@ -198,6 +200,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',

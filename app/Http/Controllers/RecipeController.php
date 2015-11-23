@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Ingredient;
 use App\Product;
+use App\Recipe;
+use Redirect;
 
 class RecipeController extends Controller
 {
@@ -64,7 +66,6 @@ class RecipeController extends Controller
     {
         $product = Product::find($id);
         $ingredients = Product::find($id)->ingredient()->get();
-
         return view('recipe.show', ['ingredients' => $ingredients, 'product' => $product]);
     }
 
@@ -76,8 +77,8 @@ class RecipeController extends Controller
      */
     public function edit($id)
     {
-        $address = Address::find($id);
-        return view('address.edit', ['address'=>$address]);
+        $product = Product::find($id);
+        return view('recipe.edit', ['product'=>$product]);
     }
 
     /**
@@ -111,8 +112,8 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
-        $address = Address::find($id);
-        $address->delete();
-        return Redirect::action('AddressController@index')->with('status', 'Address information was successfully updated.');
+        $recipe = Recipe::find($id);
+        $recipe->delete();
+        return Redirect::back()->with('status','Ingredient removed!');
     }
 }

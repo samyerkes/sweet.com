@@ -19,7 +19,6 @@
             @endforeach
         </table>
     </div>
-
 @endsection
 
 @section('sidebar')

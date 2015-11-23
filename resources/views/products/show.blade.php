@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+	
+	{!! Breadcrumbs::render('admin.products.show', $product) !!}
+
 	@if ($product->inventory < 10)
 		<div class="panel panel-warning">
 	@else
@@ -12,7 +15,7 @@
 	@endif
 		<div class="panel-heading">
 			{{ $product->name }} 
-			<a href="{{ route('admin.products.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+			<a href="{{ route('admin.products.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit </a>
 		</div>
 		<div class="panel-body">
 			<strong>Price:</strong> ${{ $product->price }} per unit<br />
@@ -45,7 +48,7 @@
 				<tr>
 					<td><a href="{{ route('admin.orders.show', array('id' => $order->id)) }}">{{ $order->id }}</a></td>
 					<td>{{ $order->user->fname }} {{ $order->user->lname }}</td>
-					<td>{{ $order->dateOrdered }}</td>
+					<td>{{ $order->created_at->format('F dS, Y') }}</td>
 					<td>
 						@if ( $order->status_id == 1)
 							<span class="glyphicon glyphicon-shopping-cart"></span>

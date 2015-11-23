@@ -31,7 +31,8 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view('address.create');
+        $user = Auth::User();
+        return view('address.create', ['user' => $user]);
     }
 
     /**
@@ -76,8 +77,9 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::User();
         $address = Address::find($id);
-        return view('address.edit', ['address'=>$address]);
+        return view('address.edit', ['address'=>$address, 'user' => $user]);
     }
 
     /**

@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
+use App\Ingredient;
+use App\User;
 use DB;
 use Response;
 
@@ -25,8 +27,6 @@ class MetricsController extends Controller
              ->groupBy('dateOrdered')
              ->get();
 
-        // return $measure;
-
         return view('metrics.orders', ['measure' => $measure]);
     }
 
@@ -40,6 +40,31 @@ class MetricsController extends Controller
         $measurementHeading = "Product inventory quantities";
         $measure = Product::all();
         return view('metrics.inventory', ['measure' => $measure, 'measurementHeading' => $measurementHeading]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function supply()
+    {
+        $measure = Ingredient::all();
+        return view('metrics.supply', ['measure' => $measure]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function users()
+    {
+        $measure = DB::table('users')
+             ->select(DB::raw('COUNT(id) as userCount, created_at'))
+             ->groupBy('created_at')
+             ->get();
+        return view('metrics.users', ['measure' => $measure]);
     }
 
     /**

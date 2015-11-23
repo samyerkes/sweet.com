@@ -3,6 +3,8 @@
 @section('content')
 	<h1>Add Product</h1>
 
+	{!! Breadcrumbs::render('admin.products.create') !!}
+
 	@if (count($errors) > 0)
 	    <div class="alert alert-danger">
 	        <ul>

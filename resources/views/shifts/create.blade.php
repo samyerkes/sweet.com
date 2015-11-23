@@ -2,7 +2,9 @@
 
 @section('content')
 	
-	<h1>Add user shift</h1>
+	<h1>Add user to shift</h1>
+
+	{!! Breadcrumbs::render('admin.schedule.create') !!}
 
     {!! Form::open(array('action' => 'ScheduleController@update', $shift->id, 'method' => 'PUT')) !!}
 

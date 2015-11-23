@@ -22,6 +22,9 @@
 @endsection
 
 @section('content')
+
+	{!! Breadcrumbs::render('admin.metrics.inventory') !!}
+
 	<div class="panel panel-default">
 		<div class="panel-heading">{{ $measurementHeading }}</div>
 		<div class="ct-chart ct-major-tenth"></div>

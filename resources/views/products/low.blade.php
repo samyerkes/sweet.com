@@ -2,6 +2,8 @@
 
 @section('content')
 
+	{!! Breadcrumbs::render('admin.products.low') !!}
+
     <div class="panel panel-default">
 		<div class="panel-heading">
 			Products with low inventories

@@ -1,6 +1,8 @@
 @extends('base')
 
 @section('content')
+    
+    {!! Breadcrumbs::render('profile.card.index', $user) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">

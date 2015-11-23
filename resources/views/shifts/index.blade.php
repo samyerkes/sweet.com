@@ -1,6 +1,9 @@
 @extends('base')
 
 @section('content')
+
+	{!! Breadcrumbs::render('admin.schedule.index') !!}
+
 	@foreach($shift as $s)
 	<div class="panel panel-default">
 		<div class="panel-heading">

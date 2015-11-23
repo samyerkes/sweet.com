@@ -1,6 +1,9 @@
 @extends('base')
 
 @section('content')
+	
+	{!! Breadcrumbs::render('admin.users.show', $user) !!}
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			{{ $user->fname }} {{ $user->lname }} <a href="{{ route('admin.users.edit', array('id' => $user->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>

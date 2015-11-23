@@ -22,6 +22,9 @@
 @endsection
 
 @section('content')
+	
+	{!! Breadcrumbs::render('admin.metrics.orders') !!}
+
 	<div class="panel panel-default">
 		<div class="panel-heading">Transaction totals per day in dollars</div>
 		<div class="ct-chart ct-major-tenth" id="chart1"></div>
@@ -77,34 +80,5 @@
 			showArea: true,
 			lineSmooth: false,
 		});
-
-		// var data = {
-		// 	// A labels array that can contain any sort of values
-		// 	labels: [
-		// 		@foreach($measure as $m)
-		// 			'{{ $m->dateOrdered }}',
-		// 		@endforeach
-		// 	],
-		// 	// Our series array that contains series objects or in this case series data arrays
-		// 	series: [
-		// 		[
-		// 			@foreach($measure as $m)
-		// 				'{{ $m->dayTotal }}',
-		// 			@endforeach
-		// 		], [
-		// 			@foreach($measure as $m)
-		// 				'{{ $m->numberTransaction }}',
-		// 			@endforeach
-		// 		]
-		// 	]
-		// };
-		// var options = {
-		//   width: 300,
-		//   height: 200
-		// };
-		// // Create a new line chart object where as first parameter we pass in a selector
-		// // that is resolving to our chart container element. The Second parameter
-		// // is the actual data object.
-		// new Chartist.Line('.ct-chart', data);
 	</script>
 @endsection

@@ -4,6 +4,8 @@
 	
 	<h1>Create customer order</h1>
 
+	{!! Breadcrumbs::render('admin.orders') !!}
+
     {!! Form::open(array('action' => 'OrderController@employeeStore')) !!}
 
 		<div class="form-group">

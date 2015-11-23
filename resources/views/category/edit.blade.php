@@ -2,7 +2,8 @@
 
 @section('content')
 	
-		
+	{!! Breadcrumbs::render('admin.category.edit') !!}
+
 	<h1>Edit product category</h1>
 
     {!! Form::open(array('action' => 'CategoryController@update', $category->id, 'method' => 'PUT')) !!}

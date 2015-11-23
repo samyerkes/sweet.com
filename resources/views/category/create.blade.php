@@ -4,6 +4,8 @@
 	
 	<h1>Create product category</h1>
 
+	{!! Breadcrumbs::render('admin.category.create') !!}
+
     {!! Form::open(array('action' => 'CategoryController@store')) !!}
 
     	<div class="form-group">

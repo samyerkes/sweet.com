@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('admin.hours.index') !!}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             Store Hours

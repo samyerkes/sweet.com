@@ -1,8 +1,13 @@
 @extends('base')
 
 @section('content')
+
+	{!! Breadcrumbs::render('admin.users.index') !!}
+
 	<div class="panel panel-default">
-		<div class="panel-heading">All users</div>
+		<div class="panel-heading">
+			All users <a href="{{ route('admin.users.create') }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New</a>
+		</div>
 		<table class="table table-striped">
 			<thead>
 				<th>ID</th>

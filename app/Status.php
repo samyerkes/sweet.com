@@ -13,4 +13,12 @@ class Status extends Model
     {
         return $this->hasMany('App\Order');
     }
+
+    /**
+     * Get the orders with this status
+     */
+    public function supplyorder()
+    {
+        return $this->hasMany('App\Supplyorder');
+    }
 }

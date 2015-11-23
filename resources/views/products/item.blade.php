@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-	
+	{!! Breadcrumbs::render('product.item', $product) !!}	
 	<div class="row">
 		<div class="col-md-6">
             <div class="thumbnail">

@@ -1,6 +1,8 @@
 @extends('base')
 
 @section('content')
+
+	{!! Breadcrumbs::render('profile.show', $currentUser, $order) !!}
 	
 	@if ($order->status->id == 2)
 		<div class="progress">
