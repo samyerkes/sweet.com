@@ -3,8 +3,8 @@ X. update Customer
 X. create CustomerOrder
 X. add CustomerOrderItem to CustomerOrder
 X. update status on CustomerOrder (should automatically update amountAvailable in ProductItem)
-6. create SupplyOrder
-7. add SupplyOrderItem to SupplyOrder
+X. create SupplyOrder
+X. add SupplyOrderItem to SupplyOrder
 X. update amountAvailable in ProductItem
 9. update amountAvailable in SupplyItem
 10. create a new production schedule - Is this an employee schedule?

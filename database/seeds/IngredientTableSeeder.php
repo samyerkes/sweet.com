@@ -18,6 +18,12 @@ class IngredientTableSeeder extends Seeder
             'quantity' => '300'
         ]);
         DB::table('ingredients')->insert([
+            'name' => 'Flour',
+            'supplier_id' => '1',
+            'unit' => 'Cups',
+            'quantity' => '500'
+        ]);
+        DB::table('ingredients')->insert([
             'name' => 'Chocolate chips',
             'supplier_id' => '2',
             'unit' => 'Tablespoons',
