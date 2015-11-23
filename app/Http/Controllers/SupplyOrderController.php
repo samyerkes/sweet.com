@@ -32,6 +32,7 @@ class SupplyOrderController extends Controller
     public function create()
     {
         $supplyorder = new Supplyorder;
+        $supplyorder->supplier_id =1;
         $supplyorder->status_id =1;
         $supplyorder->save();
         return Redirect::action('SupplyOrderController@show', $supplyorder->id);
