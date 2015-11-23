@@ -33,7 +33,7 @@
             {{ $product->name }} recipe details <a href="{{ route('admin.recipe.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
         </div>
         <div class="panel-body">
-            {{ $product->recipe }}    
+            {!! $product->recipe !!}    
         </div>
     </div>
 	

@@ -6,16 +6,16 @@
 
 	{!! Breadcrumbs::render('admin.recipe.edit', $product) !!}
 
-    {!! Form::open(array('action' => 'AddressController@update', $product->id, 'method' => 'PUT')) !!}
+    {!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.recipe.update', $product->id ], 'id'=>'myform' ]) !!}
 
 		{!! Form::hidden('id', $product->id) !!}
 
     	<div class="form-group">
-			{!! Form::label('Recipe', 'Recipe'); !!}
+			{!! Form::label('Description', 'Recipe'); !!}
 			@include('partials.quill-open')
 				{!! $product->recipe !!}
 			@include('partials.quill-close')
-			{!! Form::hidden('Recipe', 'Recipe', array('id' => 'quill')) !!}
+			{!! Form::hidden('Description', 'Description', array('id' => 'quill')) !!}
 		</div>
 
 		{!! Form::submit('Update', array('class'=>'btn btn-success')); !!}

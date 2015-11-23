@@ -90,18 +90,15 @@ class RecipeController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $id = $request->id;
-        $address = Address::find($id);
-        $address->name = $request->name;
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->zip = $request->zip;
-        $address->save();
+        $product = Product::find($id);
+        $product->recipe = $request->Description;
+        $product->save();
 
-        $request->session()->flash('status', 'Address information was successfully updated.');
+        $request->session()->flash('status', 'Product recipe was successfully updated.');
 
-        return Redirect::action('AddressController@index');
+        return Redirect::action('RecipeController@show', $product->id);
     }
 
     /**
