@@ -311,3 +311,9 @@ Breadcrumbs::register('product.item', function($breadcrumbs, $product)
     $breadcrumbs->push('All products', route('product.listing'));
     $breadcrumbs->push($product->name, route('product.item', [$product->id]));
 });
+
+Breadcrumbs::register('admin.production.index', function($breadcrumbs)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('All production schedules', route('admin.production.index'));
+});

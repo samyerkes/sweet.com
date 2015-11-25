@@ -10,6 +10,7 @@ use App\Supplier;
 use App\Ingredient;
 use App\IngredientSupplyOrder;
 use Redirect;
+use Mail;
 
 class SupplyOrderController extends Controller
 {
@@ -97,9 +98,25 @@ class SupplyOrderController extends Controller
             $supplyorder->supplier_id = $request->Supplier;
         } 
         elseif ($currentStatus == 2) {
+            $ingredients = $supplyorder->ingredient;
+            
+            // loop through each ingredient and add itself to the quantity
+            foreach ($ingredients as $i) {
+                $i->quantity = ($i->quantity + $i->pivot->quantity);
+                $i->save();
+            }
             $supplyorder->status_id = 3;
         }
         $supplyorder->save();
+
+        if ($supplyorder->status_id = 2){
+            $ingredients = $supplyorder->ingredient;
+            // return view('email.supplyorder', ['supplyorder' => $supplyorder, 'ingredients' => $ingredients]);
+            Mail::send('email.supplyorder', ['supplyorder' => $supplyorder, 'ingredients' => $ingredients], function ($m) use ($supplyorder) {
+                $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
+                $m->to($supplyorder->supplier->email, $supplyorder->supplier->name)->subject('Sweet Sweet Chocolates would like to make a supply order');
+            });
+        }
         return Redirect::action('SupplyOrderController@index');
     }
 

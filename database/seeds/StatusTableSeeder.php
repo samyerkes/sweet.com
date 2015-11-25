@@ -20,8 +20,5 @@ class StatusTableSeeder extends Seeder
         DB::table('statuses')->insert([
             'status' => 'Completed'
         ]);
-        DB::table('statuses')->insert([
-            'status' => 'Backordered'
-        ]);
     }
 }

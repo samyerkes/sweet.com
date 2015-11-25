@@ -29,4 +29,12 @@ class Supplyorder extends Model
     {
         return $this->belongsTo('App\Supplier');
     }
+
+    /**
+     * Get the ingredients for the supplyorder.
+     */
+    public function ingredient()
+    {
+        return $this->belongsToMany('App\Ingredient', 'ingredient_supply_orders')->withPivot('id', 'quantity');;
+    }
 }

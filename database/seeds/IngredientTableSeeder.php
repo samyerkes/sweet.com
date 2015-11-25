@@ -15,10 +15,10 @@ class IngredientTableSeeder extends Seeder
             'name' => 'Sugar',
             'supplier_id' => '1',
             'unit' => 'Cups',
-            'quantity' => '300'
+            'quantity' => '500'
         ]);
         DB::table('ingredients')->insert([
-            'name' => 'Flour',
+            'name' => 'Cocoa powder',
             'supplier_id' => '1',
             'unit' => 'Cups',
             'quantity' => '500'
@@ -26,20 +26,32 @@ class IngredientTableSeeder extends Seeder
         DB::table('ingredients')->insert([
             'name' => 'Chocolate chips',
             'supplier_id' => '2',
-            'unit' => 'Tablespoons',
-            'quantity' => '300'
+            'unit' => 'Cups',
+            'quantity' => '500'
         ]);
         DB::table('ingredients')->insert([
             'name' => 'Milk',
             'supplier_id' => '3',
             'unit' => 'Cups',
-            'quantity' => '400'
+            'quantity' => '500'
         ]);
         DB::table('ingredients')->insert([
             'name' => 'Butter',
             'supplier_id' => '1',
             'unit' => 'Sticks',
-            'quantity' => '40'
+            'quantity' => '500'
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Salt',
+            'supplier_id' => '1',
+            'unit' => 'Tablespoons',
+            'quantity' => '500'
+        ]);
+        DB::table('ingredients')->insert([
+            'name' => 'Vanilla',
+            'supplier_id' => '1',
+            'unit' => 'Tablespoons',
+            'quantity' => '500'
         ]);
     }
 }

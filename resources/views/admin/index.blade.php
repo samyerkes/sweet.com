@@ -62,12 +62,19 @@
             
             @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
+                    <div class="panel-heading">Production</div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{ route('admin.production.index') }}">Production schedule</a></li>
+                    </ul>
+                </div>
+
+                <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{ route('admin.metrics.users') }}">User metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.orders') }}">Transaction metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.inventory') }}">Product inventory</a></li>
-                        <li class="list-group-item"><a href="{{ route('admin.metrics.supply') }}">Supply inventory</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.metrics.supply') }}">Ingredients inventory</a></li>
                     </ul>
                 </div>
             @endif

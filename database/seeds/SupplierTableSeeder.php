@@ -12,6 +12,12 @@ class SupplierTableSeeder extends Seeder
     public function run()
     {
         DB::table('suppliers')->insert([
+            'name' => 'Sam\'s house',
+            'email' => 'samuelyerkes@gmail.com',
+            'phone' => '8043874267',
+            'address' => '2318 Penrose Dr., Bon Air, Virginia 23235'
+        ]);
+        DB::table('suppliers')->insert([
             'name' => 'Kroger',
             'email' => 'supplies@kroger.com',
             'phone' => '8043338888',

@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::resource('/admin/supplier', 'SupplierController');
 		Route::resource('/admin/supplyorder', 'SupplyOrderController');
 		Route::resource('/admin/recipe', 'RecipeController');
+		Route::resource('/admin/production', 'ProductionController');
 		Route::get('/admin/recipe/{product}/ingredient/add', ['as'=>'admin.recipe.ingredient.add', 'uses' => 'IngredientController@add']);
 		Route::post('/admin/recipe/{product}/ingredient', ['as'=>'admin.recipe.ingredient.storeAdd', 'uses' => 'IngredientController@AddStore']);
 

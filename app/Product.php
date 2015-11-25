@@ -39,4 +39,12 @@ class Product extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    /**
+     * Get the batches for the product.
+     */
+    public function batch()
+    {
+        return $this->hasMany('App\Batch');
+    }
 }

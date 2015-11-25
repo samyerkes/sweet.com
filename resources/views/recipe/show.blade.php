@@ -6,7 +6,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				{{ $product->name }} ingredients (per batch)<a href="{{ route('admin.recipe.ingredient.add', array('product' => $product->id)) }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
+				{{ $product->name }} ingredients (makes {{ $product->units_per_batch }} units per batch)<a href="{{ route('admin.recipe.ingredient.add', array('product' => $product->id)) }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
 			</div>
 			<table class="table table-striped">
             <thead>

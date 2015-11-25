@@ -14,12 +14,16 @@ class IngredientSupplyOrderTableSeeder extends Seeder
         DB::table('ingredient_supply_orders')->insert([
             'supplyorder_id' => 1,
             'ingredient_id' => 1,
-            'quantity' => 25,
+            'quantity' => 10,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
         ]);
         DB::table('ingredient_supply_orders')->insert([
             'supplyorder_id' => 1,
             'ingredient_id' => 2,
-            'quantity' => 35,
+            'quantity' => 10,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
         ]);
     }
 }

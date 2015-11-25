@@ -19,7 +19,9 @@
 	    		@foreach($supplyorder as $s)
 	    		<tr>
 	    			<td><a href="{{ route('admin.supplyorder.show', array('id' => $s->id)) }}">{{ $s->id }}</a></td>
-	    			<td>{{ $s->supplier->name }}</td>
+	    			<td>
+	    				{{ $s->supplier->name or "Open" }}
+	    			</td>
 	    			<td>{{ date('F d, Y', strtotime($s->created_at)) }}</td>
 	    			<td>{{ $s->status->status }}</td>
 	    		</tr>

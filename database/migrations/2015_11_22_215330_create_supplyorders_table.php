@@ -14,7 +14,7 @@ class CreateSupplyordersTable extends Migration
     {
         Schema::create('supplyorders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('supplier_id');
+            $table->integer('supplier_id')->nullable();
             $table->integer('status_id');
             $table->timestamps();
         });

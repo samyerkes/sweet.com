@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SupplyOrderTableSeeder extends Seeder
+class ProductionScheduleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,10 @@ class SupplyOrderTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('supplyorders')->insert([
-            'supplier_id' => null,
+        DB::table('batches')->insert([
+            'product_id' => 1,
+            'batches' => 1,
+            'proddate' => \Carbon\Carbon::createFromTime(24, 0, 0, 'America/New_York'),
             'status_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
