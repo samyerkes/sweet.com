@@ -14,6 +14,8 @@ use DB;
 use Redirect;
 use App\Address;
 use Mail;
+use Stripe\Error\Card;
+use Stripe\Stripe;
 
 class CartController extends Controller
 {
@@ -119,6 +121,24 @@ class CartController extends Controller
         $order->save();
 
         $user = Auth::User();
+
+        Stripe::setApiKey(env('STRIPE_TEST_KEY'));
+
+        // Get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // Create the charge on Stripe's servers - this will charge the user's card
+        $stripeAmount = bcmul($request->total, 100);
+        try {
+            $charge = \Stripe\Charge::create(array(
+                "amount" => $stripeAmount, // amount in cents, again
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Sweet Sweet Chocolates"
+            ));
+        } catch(Card $e) {
+            return "We're sorry your credit card has been declined.";
+        }
 
         // return view('email.submitorder', ['order' => $order, 'user' => $user, 'items'=>$items]);
         Mail::send('email.submitorder', ['order' => $order, 'user' => $user, 'items'=>$items], function ($m) use ($order, $user) {
