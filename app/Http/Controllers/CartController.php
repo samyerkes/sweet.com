@@ -38,12 +38,12 @@ class CartController extends Controller
             $order->status_id = 1;
             $order->save();
         }
-        
+
         $items = Order::findOrFail($cart)->product()->get();
 
         $sum = 0;
         foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);
         }
 
         return view('cart.index', ['items'=>$items, 'sum'=>$sum, 'user'=>$user]);
@@ -67,7 +67,7 @@ class CartController extends Controller
 
         $sum = 0;
         foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);
         }
 
         $addresses = $user->address()->get();
@@ -84,10 +84,10 @@ class CartController extends Controller
      */
     public function submitOrder(Request $request)
     {
-        $this->validate($request, [
-            'address' => 'required',
-            'payment' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'address' => 'required',
+        //     'payment' => 'required',
+        // ]);
 
         $now = \Carbon\Carbon::now();
 
@@ -102,10 +102,19 @@ class CartController extends Controller
             $product->save();
         }
 
+        if (!empty($request->street)) {
+          $street = $request->street;
+          $city = $request->city;
+          $state = $request->state;
+          $zip = $request->zip;
+          $order->address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
+        } else {
+          $order->address = $request->address;
+        }
+
         $order->transaction_total = $request->total;
         $order->dateOrdered = $now;
         $order->status_id = 2;
-        $order->address = $request->address;
         $order->payment = $request->payment;
         $order->save();
 
@@ -116,7 +125,7 @@ class CartController extends Controller
             $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
             $m->to($user->email, $user->fname.' '.$user->lname)->subject('Thank you for your order!');
         });
-        
+
         $request->session()->flash('status', 'Your order has been submitted!');
 
         return Redirect::action('ProfileController@index');
@@ -147,7 +156,7 @@ class CartController extends Controller
                      ->where('status_id', '=', 1)
                      ->where('user_id', '=', $user->id)
                      ->value('id');
-        
+
         if(empty($cart)) {
             $order = new Order;
             $order->user_id = $user->id;
@@ -167,11 +176,11 @@ class CartController extends Controller
                 $orderProduct->product_id = $request->product_id;
                 $orderProduct->quantity = $request->quantity + $orderProduct->quantity;
                 $orderProduct->save();
-            } 
+            }
             // else make a new line item for this new item
             else {
                 $orderProduct = new OrderProduct;
-                $orderProduct->order_id = $cart; 
+                $orderProduct->order_id = $cart;
                 $orderProduct->product_id = $request->product_id;
                 $orderProduct->quantity = $request->quantity;
                 $orderProduct->save();

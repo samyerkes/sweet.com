@@ -96,10 +96,10 @@ class SupplyOrderController extends Controller
         if($currentStatus == 1) {
             $supplyorder->status_id = 2;
             $supplyorder->supplier_id = $request->Supplier;
-        } 
+        }
         elseif ($currentStatus == 2) {
             $ingredients = $supplyorder->ingredient;
-            
+
             // loop through each ingredient and add itself to the quantity
             foreach ($ingredients as $i) {
                 $i->quantity = ($i->quantity + $i->pivot->quantity);

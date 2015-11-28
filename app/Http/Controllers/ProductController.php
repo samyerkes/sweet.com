@@ -28,7 +28,7 @@ class ProductController extends Controller
             $products = Product::all();
             $category = 'All products';
         }
-        
+
         return view('products.public', ['products' => $products, 'category'=>$category]);
     }
 
@@ -183,9 +183,9 @@ class ProductController extends Controller
 
             $request->file('Image')->move(
                 base_path() . '/public/uploads/images/products/', $imageName
-            );    
+            );
         }
-        
+
         $request->session()->flash('status', 'Product was successfully updated.');
 
         $products = Product::all();

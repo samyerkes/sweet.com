@@ -1,18 +1,15 @@
-X create Customer 
-X. update Customer
-X. create CustomerOrder
-X. add CustomerOrderItem to CustomerOrder
-X. update status on CustomerOrder (should automatically update amountAvailable in ProductItem)
-X. create SupplyOrder
-X. add SupplyOrderItem to SupplyOrder
-X. update amountAvailable in ProductItem
-9. update amountAvailable in SupplyItem
-10. create a new production schedule - Is this an employee schedule?
-11. update production schedule status (should automatically update amountAvailable in ProductItem)
-X. view recipe
+XX create Customer
+XX. update Customer
+XX. create CustomerOrder
+XX. add CustomerOrderItem to CustomerOrder
+XX. update status on CustomerOrder (should automatically update amountAvailable in ProductItem)
+XX. create SupplyOrder
+XX. add SupplyOrderItem to SupplyOrder
+XX. update amountAvailable in ProductItem
+XX. update amountAvailable in SupplyItem
+XX. create a new production schedule
+XX. update production schedule status (should automatically update amountAvailable in ProductItem)
+XX. view recipe
 X. create a customer report
-X. create inventory of product items report
-X. create inventory of supply items report 
-
-
-production schedule
+XX. create inventory of product items report
+XX. create inventory of supply items report

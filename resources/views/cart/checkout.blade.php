@@ -49,10 +49,10 @@
         <div class="panel-heading">
             Shipping address
             <div id="shippingmethod" class="btn-group pull-right" data-toggle="buttons">
-                <label id="addrsaved-btn" class="btn btn-primary btn-xs active">
+                <label id="addrsaved-btn" class="btn btn-default btn-xs active">
                     <input type="radio" id="addrsaved" name="addrsaved" value="addrsaved" />Use a saved address
                 </label>
-                <label id="addrnosaved-btn" class="btn btn-primary btn-xs notactive">
+                <label id="addrnosaved-btn" class="btn btn-default btn-xs notactive">
                     <input type="radio" name="addrnosaved" value="addrnosaved" />Use a new address
                 </label>
             </div>
@@ -98,12 +98,12 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Payment method 
+            Payment method
             <div id="paymentmethod" class="btn-group pull-right" data-toggle="buttons">
-                <label id="ccsaved" class="btn btn-primary btn-xs active">
+                <label id="ccsaved" class="btn btn-default btn-xs active">
                     <input type="radio" id="ccsaved" name="ccsaved" value="ccsaved" />Use a saved credit card
                 </label>
-                <label id="ccnosaved" class="btn btn-primary btn-xs notactive">
+                <label id="ccnosaved" class="btn btn-default btn-xs notactive">
                     <input type="radio" name="ccnosaved" value="ccnosaved" />Use a new credit card
                 </label>
             </div>
@@ -113,14 +113,14 @@
                 {!! Form::label('payment', 'Saved payment methods'); !!}
                 <select name="payment" class="form-control">
                     @foreach ($creditcards as $cc)
-                        <option value="{{ $cc->name }}, {{ $cc->number }}, {{ $cc->expiration }}, {{ $cc->cvc }}">{{ $cc->name }} - {{ $cc->number }}</option>
+                        <option value="{{ $cc->number }}">{{ $cc->name }} - {{ $cc->number }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div id="ccnosaved" class="form-group" style="display:none;">
                 {!! Form::label('payment', 'Number'); !!}
-                {!! Form::number('payment', null, array('class' => 'form-control', 'placeholder'=>'XXXX-XXXX-XXXX-XXXX')); !!}
+                {!! Form::number('foo', 'null', array('class' => 'form-control', 'placeholder'=>'XXXX-XXXX-XXXX-XXXX')); !!}
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
     </div>
 
     {!! Form::close() !!}
-    
+
 @endsection
 
 @section('scripts')
@@ -160,10 +160,14 @@
             $('#paymentmethod > #ccnosaved').on('click', function() {
                 $('.panel-body #ccsaved').hide();
                 $('.panel-body #ccnosaved').show();
+                $('.panel-body #ccsaved input.form-control').attr('name', 'foo');
+                $('.panel-body #ccnosaved input.form-control').attr('name', 'payment');
             });
             $('#paymentmethod > #ccsaved').on('click', function() {
                 $('.panel-body #ccsaved').show();
                 $('.panel-body #ccnosaved').hide();
+                $('.panel-body #ccnoccsaved input.form-control').attr('name', 'foo');
+                $('.panel-body #ccsaved input.form-control').attr('name', 'payment');
             });
         });
     </script>

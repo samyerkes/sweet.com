@@ -4,7 +4,10 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            All recipes <a href="{{ route('admin.recipe.create') }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New</a>
+            All recipes 
+            @if ($currentUser->role->id == 1)
+                <a href="{{ route('admin.recipe.create') }}" class="btn btn-success pull-right btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New</a>
+            @endif
         </div>
         <table class="table table-striped">
             <thead>

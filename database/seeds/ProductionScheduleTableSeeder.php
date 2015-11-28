@@ -14,7 +14,15 @@ class ProductionScheduleTableSeeder extends Seeder
         DB::table('batches')->insert([
             'product_id' => 1,
             'batches' => 1,
-            'proddate' => \Carbon\Carbon::createFromTime(24, 0, 0, 'America/New_York'),
+            'proddate' => \Carbon\Carbon::createFromTime(0, 0, 0, 'America/New_York'),
+            'status_id' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+        DB::table('batches')->insert([
+            'product_id' => 2,
+            'batches' => 1,
+            'proddate' => \Carbon\Carbon::createFromTime(28, 0, 0, 'America/New_York'),
             'status_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),

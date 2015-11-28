@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	
+
 	{!! Breadcrumbs::render('admin.products.show', $product) !!}
 
 	@if ($product->inventory < 10)
@@ -14,7 +14,7 @@
 		<div class="panel panel-success">
 	@endif
 		<div class="panel-heading">
-			{{ $product->name }} 
+			{{ $product->name }}
 			<a href="{{ route('admin.products.edit', array('id' => $product->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit </a>
 		</div>
 		<div class="panel-body">
@@ -32,7 +32,7 @@
 			<div class="ct-chart ct-major-tenth"></div>
 		</div>
 	</div>
-	
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Orders this week containing {{ $product->name }}

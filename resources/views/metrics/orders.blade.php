@@ -3,12 +3,9 @@
 @section('styles')
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.9.4/chartist.min.css" />
 	<style>
-	/*.ct-series-a .ct-line {
-	  stroke: #16a085;
+	.ct-label {
+		font-size: 1rem;
 	}
-	.ct-series-a .ct-point {
-	  stroke: #16a085;
-	}*/
 	.ct-series-a .ct-area{
 		fill: orange;
 	}
@@ -22,17 +19,17 @@
 @endsection
 
 @section('content')
-	
+
 	{!! Breadcrumbs::render('admin.metrics.orders') !!}
 
 	<div class="panel panel-default">
-		<div class="panel-heading">Transaction totals per day in dollars</div>
+		<div class="panel-heading">Transaction totals per day in dollars for the last week</div>
 		<div class="ct-chart ct-major-tenth" id="chart1"></div>
 	</div>
-	
+
 
 	<div class="panel panel-default">
-		<div class="panel-heading">Order totals per day</div>
+		<div class="panel-heading">Order totals per day for the last week</div>
 		<div class="ct-chart ct-major-tenth" id="chart2"></div>
 	</div>
 
@@ -49,13 +46,13 @@
 	<script>
 		new Chartist.Line('#chart1', {
 	    labels: [
-				@foreach($measure as $m)
-					'{{ $m->dateOrdered }}',
+				@foreach($dates as $d)
+					'{{ $d }}',
 				@endforeach
 			],
 	    series: [[
-					@foreach($measure as $m)
-						'{{ $m->dayTotal }}',
+					@foreach($sumTransactions as $st)
+						'{{ $st }}',
 					@endforeach
 				]]
 		}, {
@@ -66,13 +63,13 @@
 
 		new Chartist.Line('#chart2', {
 	    labels: [
-				@foreach($measure as $m)
-					'{{ $m->dateOrdered }}',
+				@foreach($dates as $d)
+					'{{ $d }}',
 				@endforeach
 			],
 	    series: [[
-					@foreach($measure as $m)
-						'{{ $m->numberTransaction }}',
+					@foreach($orderCount as $o)
+						'{{ $o }}',
 					@endforeach
 				]]
 		}, {

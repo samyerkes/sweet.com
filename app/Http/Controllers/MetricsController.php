@@ -11,6 +11,9 @@ use App\Ingredient;
 use App\User;
 use DB;
 use Response;
+use DateTime;
+use DateInterval;
+use DatePeriod;
 
 class MetricsController extends Controller
 {
@@ -21,13 +24,33 @@ class MetricsController extends Controller
      */
     public function orders()
     {
-        $measure = DB::table('orders')
-             ->select(DB::raw('SUM(transaction_total) as dayTotal, COUNT(id) as numberTransaction, dateOrdered'))
-             ->where('status_id', '>', 1)
-             ->groupBy('dateOrdered')
-             ->get();
+        $begin = new DateTime(\Carbon\Carbon::now()->subDays(7));
+        $end = new DateTime(\Carbon\Carbon::now());
 
-        return view('metrics.orders', ['measure' => $measure]);
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($begin, $interval, $end);
+
+        $orderCount = [];
+        foreach ($period as $p ){
+          $dt = $p->format( "Y-m-d" );
+          $oc = Order::where('dateOrdered', $dt)->where('status_id', '>', 1)->count();
+          $orderCount[] = $oc;
+        };
+
+        $sumTransactions = [];
+        foreach ($period as $p ){
+          $dt = $p->format( "Y-m-d" );
+          $daySum = Order::where('dateOrdered', $dt)->where('status_id', '>', 1)->sum('transaction_total');
+          $sumTransactions[] = $daySum ;
+        };
+
+        $dates = [];
+        foreach ($period as $p ){
+          $dt = $p->format( "Y-m-d" );
+          $dates[] = $dt;
+        };
+
+        return view('metrics.orders', ['dates' => $dates, 'orderCount' => $orderCount, 'sumTransactions' => $sumTransactions]);
     }
 
     /**
@@ -64,6 +87,7 @@ class MetricsController extends Controller
              ->select(DB::raw('COUNT(id) as userCount, created_at'))
              ->groupBy('created_at')
              ->get();
+
         return view('metrics.users', ['measure' => $measure]);
     }
 

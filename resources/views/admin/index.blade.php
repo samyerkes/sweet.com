@@ -16,17 +16,21 @@
                 </ul>
             </div>
 
-            @if ($currentUser->role->id == 1)
+            
                 <div class="panel panel-default">
                     <div class="panel-heading">Products</div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ route('admin.products.index') }}">Edit products</a></li>
-                        <li class="list-group-item"><a href="{{ route('admin.category.index') }}">Manage product categories</a></li>
-                        <li class="list-group-item"><a href="{{ route('admin.products.low') }}">Low inventory</a></li>
-                        <li class="list-group-item"><a href="#">Manage reviews</a></li>
+                        @if ($currentUser->role->id == 1)
+                            <li class="list-group-item"><a href="{{ route('admin.products.index') }}">Edit products</a></li>
+                            <li class="list-group-item"><a href="{{ route('admin.category.index') }}">Manage product categories</a></li>
+                            <li class="list-group-item"><a href="{{ route('admin.products.low') }}">Low inventory</a></li>
+                            <li class="list-group-item"><a href="#">Manage reviews</a></li>
+                        @endif
+                            <li class="list-group-item"><a href="{{ route('admin.recipe.index') }}">View recipes</a></li>
                     </ul>
                 </div>
-
+            
+            @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
                     <div class="panel-heading">Supplies</div>
                     <ul class="list-group">
@@ -59,15 +63,15 @@
                     </ul>
                 </div>
             @endif
-            
-            @if ($currentUser->role->id == 1)
-                <div class="panel panel-default">
-                    <div class="panel-heading">Production</div>
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ route('admin.production.index') }}">Production schedule</a></li>
-                    </ul>
-                </div>
+        
+            <div class="panel panel-default">
+                <div class="panel-heading">Production</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{{ route('admin.production.index') }}">Production schedule</a></li>
+                </ul>
+            </div>
 
+            @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">

@@ -9,7 +9,7 @@
 <h1>Sweet Sweet Chocolates would like to order the following from you:</h1>
 <ul>
     @foreach($ingredients as $i)
-        <li>{{ $i->quantity }} {{ $i->unit}} of {{ $i->name }}</li>
+        <li>{{ $i->pivot->quantity }} {{ $i->unit}} of {{ $i->name }}</li>
     @endforeach
 </ul>
 

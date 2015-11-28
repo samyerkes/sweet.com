@@ -2,7 +2,7 @@
 
 @section('content')
 	<h1>Edit Product</h1>
-	
+
 	{!! Breadcrumbs::render('admin.products.edit', $product) !!}
 
 	{!! Form::open([ 'method'  => 'put', 'route' => [ 'admin.products.update', $product->id ], 'id'=>'myform', 'files' => true ]) !!}
@@ -13,7 +13,7 @@
 	    		{!! Form::label('Name', 'Name'); !!}
 	    		{!! Form::text('Name', $product->name, array('class' => 'form-control', 'placeholder'=>'Name')); !!}
 			</div>
-        
+
     		<div class="form-group">
 				{!! Form::label('Price', 'Price'); !!}
 		    	{!! Form::number('Price', $product->price, array('class' => 'form-control', 'placeholder'=>'Price')); !!}
@@ -44,6 +44,11 @@
 		    <div class="form-group">
 				{!! Form::label('Quantity', 'Quantity'); !!}
 		    	{!! Form::number('Quantity', $product->inventory, array('class' => 'form-control', 'placeholder'=>'Quantity')); !!}
+			</div>
+
+			<div class="form-group">
+				{!! Form::label('Show', 'Show publicly'); !!}
+				{!! Form::checkbox('Show', null, empty($product->deleted_at)); !!}
 			</div>
 
     	{!! Form::submit('Update', array('class'=>'btn btn-primary')); !!}

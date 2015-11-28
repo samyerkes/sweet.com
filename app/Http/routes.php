@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['middleware' => 'addr.user'], function() {
 	    Route::resource('profile/address', 'AddressController', ['only' => ['show', 'edit','update','destroy']]);
 	});
-	
+
 	Route::get('/admin/schedule/create/{id}', [
 	    'as' => 'admin.schedule.create', 'uses' => 'ScheduleController@create'
 	]);
@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/admin/metrics/supply', ['as'=>'admin.metrics.supply', 'uses' => 'MetricsController@supply']);
 		Route::get('/admin/metrics/users', ['as'=>'admin.metrics.users', 'uses' => 'MetricsController@users']);
 
-		Route::get('/admin/products/low', ['as' => 'admin.products.low', 'uses' => 'ProductController@lowInventory']);		
+		Route::get('/admin/products/low', ['as' => 'admin.products.low', 'uses' => 'ProductController@lowInventory']);
 		Route::resource('admin/products', 'ProductController');
 
 		Route::get('/admin/orders/pending', ['as' => 'admin.orders.pending', 'uses' => 'OrderController@pending']);
@@ -101,5 +101,5 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('admin/orders', ['as' => 'admin.orders.employeestore', 'uses' => 'OrderController@employeeStore']);
 
 	});
-	
+
 });

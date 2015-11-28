@@ -11,6 +11,7 @@ use App\Order;
 use App\Shift;
 use App\Product;
 use App\Category;
+use App\Batch;
 use Illuminate\Contracts\Auth\Guard;
 
 class AppServiceProvider extends ServiceProvider
@@ -41,6 +42,11 @@ class AppServiceProvider extends ServiceProvider
                         ->where('day', $today)
                         ->value('hours');
           $view->with('hours', $hours);
+        });
+
+        view()->composer('sidebar.admin', function($view){
+          $batches = Batch::where('proddate', \Carbon\Carbon::today())->count();
+          $view->with('batches', $batches);
         });
 
         view()->composer('sidebar.admin', function($view){

@@ -317,3 +317,10 @@ Breadcrumbs::register('admin.production.index', function($breadcrumbs)
     $breadcrumbs->push('Admin dashboard', route('admin'));
     $breadcrumbs->push('All production schedules', route('admin.production.index'));
 });
+
+Breadcrumbs::register('admin.production.edit', function($breadcrumbs, $productionschedule)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('All production schedules', route('admin.production.index'));
+    $breadcrumbs->push('Edit production schedule #' . $productionschedule->id, route('admin.production.edit'));
+});
