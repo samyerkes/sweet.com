@@ -9,11 +9,22 @@
 </div>
 
 <h2>Weekly Special</h2>
-    				
+
+@foreach($specialProduct as $p)
 <div class="thumbnail">
-	<img src="http://naturalrevolution.org/wp-content/uploads/2015/02/chocolate.jpg" alt="Swiss Chocolate">
+  <a href="{{ route('product.item', $p->id)}}">
+	   <img src="/uploads/images/products/product-{{ $p->id }}.jpg" alt="{{ $p->name }}">
+  </a>
 	<div class="caption">
-		<h3>Swiss Chocolate</h3>
-		<p><a href="#" class="btn btn-primary" role="button">Add to cart</a>
+		<h3>{{ $p->name }} <span class="label label-primary">${{ $p->price }}</span></h3>
+    {!! Form::open(array('action' => 'CartController@store')) !!}
+      {!! Form::hidden('product_id', $p->id) !!}
+      <div class="form-group">
+        {!! Form::label('quantity', 'Quantity'); !!}
+        {!! Form::number('quantity', 1, array('class' => 'form-control', 'placeholder'=>'1')); !!}
+      </div>
+    {!! Form::submit('Add to cart', array('class'=>'btn btn-primary')); !!}
+    {!! Form::close() !!}
 	</div>
 </div>
+@endforeach

@@ -47,8 +47,8 @@
 			</div>
 
 			<div class="form-group">
-				{!! Form::label('Show', 'Show publicly'); !!}
-				{!! Form::checkbox('Show', null, empty($product->deleted_at)); !!}
+				{!! Form::label('Special', 'Should the product be a special?'); !!}
+				{!! Form::checkbox('Special', 1, $product->special); !!}
 			</div>
 
     	{!! Form::submit('Update', array('class'=>'btn btn-primary')); !!}

@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -59,6 +60,11 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        Mail::send('email.registerUser', ['data' => $data], function ($m) use ($data) {
+            $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
+            $m->to($data['email'], $data['fname'])->subject('Thanks for joining Sweet Sweet Chocolates');
+        });
+
         return User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],

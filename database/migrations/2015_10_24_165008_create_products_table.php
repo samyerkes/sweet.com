@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->longText('recipe');
             $table->integer('units_per_batch');
             $table->integer('inventory');
+            $table->boolean('special')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

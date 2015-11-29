@@ -18,8 +18,15 @@
 	    	</thead>
 	    	@foreach ($products as $p)
 	    		<tr>
-	    			<td><a href="{{ route('admin.products.show', array('id' => $p->id)) }}">{{ $p->id }}</a></td>
-		    		<td>{{ $p->name }}</td>
+	    			<td>
+							<a href="{{ route('admin.products.show', array('id' => $p->id)) }}">{{ $p->id }}</a>
+						</td>
+		    		<td>
+							{{ $p->name }}
+							@if ($p->special == 1)
+								<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+							@endif
+						</td>
 		    		<td>{{ $p->category->name }}</td>
 		    		<td>${{ $p->price }}</td>
 		    		<td>{{ $p->inventory }}</td>

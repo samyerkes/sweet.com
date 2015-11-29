@@ -52,6 +52,12 @@
 	    	{!! Form::number('Quantity', null, array('class' => 'form-control', 'placeholder'=>'Quantity')); !!}
 		</div>
 
+		<div class="form-group">
+			{!! Form::label('Special', 'Should the product be a special?'); !!}
+			{!! Form::hidden('Special',0) !!}
+			{!! Form::checkbox('Special', 1); !!}
+		</div>
+
     	{!! Form::submit('Submit', array('class'=>'btn btn-primary')); !!}
 	{!! Form::close() !!}
 

@@ -13,11 +13,11 @@ class EmployeeShiftsTableSeeder extends Seeder
     {
         foreach (range(1, 100) as $i) {
             DB::table('user_shifts')->insert([
-	            'user_id' => rand(1,2),
+	            'user_id' => rand(2,3),
 	            'shift_id' => $i,
 	            'start_time' => \Carbon\Carbon::createFromTime(8, 0, 0, 'America/New_York'),
 	            'end_time' => \Carbon\Carbon::createFromTime(17, 0, 0, 'America/New_York'),
-	        ]);	    	
+	        ]);
         }
     }
 }

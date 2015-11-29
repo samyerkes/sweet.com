@@ -10,6 +10,7 @@ use App\Order;
 use Storage;
 use DB;
 use App\Category;
+use Redirect;
 
 class ProductController extends Controller
 {
@@ -105,6 +106,7 @@ class ProductController extends Controller
         $product->description = $request->Description;
         $product->inventory = $request->Quantity;
         $product->category_id = $request->Category;
+        $product->special = $request->Special;
         $product->save();
 
         $extension = $request->file('Image')->getClientOriginalExtension();
@@ -118,7 +120,7 @@ class ProductController extends Controller
 
         $products = Product::all();
 
-        return view('products.index', ['products' => $products]);
+        return Redirect::action('ProductController@show', $product->id);
     }
 
     /**
@@ -175,6 +177,7 @@ class ProductController extends Controller
         $product->description = $request->Description;
         $product->inventory = $request->Quantity;
         $product->category_id = $request->Category;
+        $product->special = $request->Special;
         $product->save();
 
         if(!empty($request->file('Image'))) {
@@ -189,7 +192,7 @@ class ProductController extends Controller
         $request->session()->flash('status', 'Product was successfully updated.');
 
         $products = Product::all();
-        return view('products.index', ['products' => $products]);
+        return Redirect::action('ProductController@show', $product->id);
 
     }
 

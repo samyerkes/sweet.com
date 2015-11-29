@@ -27,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
           $view->with('currentUser', Auth::user());
         });
 
+        view()->composer('sidebar.special', function($view){
+          $specialProduct = Product::where('special', 1)->get();
+          $view->with('specialProduct', $specialProduct);
+        });
+
         view()->composer('sidebar.admin', function($view){
           $today = \Carbon\Carbon::today();
           $orders = DB::table('orders')
@@ -71,11 +76,11 @@ class AppServiceProvider extends ServiceProvider
                         ->value('id');
 
                     $cartItems = DB::table('order_products')->where('order_id', '=', $cart)->sum('quantity');
-                    $view->with('cartItems', $cartItems);    
-                }                
+                    $view->with('cartItems', $cartItems);
+                }
             });
 
-        
+
     }
 
     /**
