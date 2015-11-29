@@ -28,7 +28,6 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'status_id' => $faker->numberBetween($min = 1, $max = 3),
         'dateOrdered' => $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now'),
         'address' => $faker->address(),
-        'payment' => $faker->creditCardNumber(),
         'transaction_total' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 100),
         'dateCompleted' => NULL,
     ];
@@ -50,15 +49,5 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
         'city' => $faker->city(),
         'state' => $faker->stateAbbr(),
         'zip' => $faker->postcode(),
-    ];
-});
-
-$factory->define(App\CreditCard::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => $faker->numberBetween($min = 1, $max = 27),
-        'name' => $faker->word(),
-        'number' => $faker->creditCardNumber(),
-        'expiration' => $faker->creditCardExpirationDate(),
-        'cvc' => 123,
     ];
 });

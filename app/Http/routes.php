@@ -48,16 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('cart', 'CartController');
 
 	Route::resource('profile/address', 'AddressController');
-	Route::resource('profile/card', 'CreditCardController');
 	Route::resource('profile', 'ProfileController');
 	Route::group(['middleware' => 'UserInfo'], function() {
 	    Route::resource('profile', 'ProfileController', ['only' => ['show', 'edit','update','destroy']]);
 	});
 	Route::group(['middleware' => 'OrderUser'], function() {
 	    Route::resource('profile', 'ProfileController', ['only' => ['show', 'edit','update','destroy']]);
-	});
-	Route::group(['middleware' => 'cc.user'], function() {
-	    Route::resource('profile/card', 'CreditCardController', ['only' => ['show', 'edit','update','destroy']]);
 	});
 	Route::group(['middleware' => 'addr.user'], function() {
 	    Route::resource('profile/address', 'AddressController', ['only' => ['show', 'edit','update','destroy']]);

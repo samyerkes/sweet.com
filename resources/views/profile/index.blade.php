@@ -27,7 +27,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $user->fname }}'s default addresses <a href="{{ route('profile.address.index') }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
-        </div>      
+        </div>
         <table class="table table-striped">
             <thead>
                 <th>Name</th>
@@ -45,29 +45,7 @@
                     <td>{{ $addr->zip }}</td>
                 </tr>
             @endforeach
-        </table>   
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {{ $user->fname }}'s default payment options <a href="{{ route('profile.card.index') }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
-        </div>      
-        <table class="table table-striped">
-            <thead>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Expiration</th>
-                <th>CVC</th>
-            </thead>
-                @foreach($creditcards as $cc)
-                <tr>
-                    <td>{{ $cc->name }}</td>
-                    <td>{{ $cc->number }}</td>
-                    <td>{{ $cc->expiration }}</td>
-                    <td>{{ $cc->cvc }}</td>
-                </tr>
-            @endforeach
-        </table>   
+        </table>
     </div>
 
     <div class="panel panel-default">

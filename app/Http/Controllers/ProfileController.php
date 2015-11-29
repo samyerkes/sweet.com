@@ -24,9 +24,8 @@ class ProfileController extends Controller
         $user = Auth::User();
         $orders = User::find($user->id)->order;
         $addresses = User::find($user->id)->address;
-        $creditcards = User::find($user->id)->creditcard;
 
-        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses, 'creditcards'=>$creditcards]);
+        return view('profile.index', ['user'=>$user, 'orders'=>$orders, 'addresses'=>$addresses]);
     }
 
     /**
@@ -36,7 +35,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        // not needed cause we have auth 
+        // not needed cause we have auth
     }
 
     /**
@@ -63,7 +62,7 @@ class ProfileController extends Controller
 
         $sum = 0;
         foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);
         }
         if($order->status_id == 1) {
             return Redirect::action('CartController@index');

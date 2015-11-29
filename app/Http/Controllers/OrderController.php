@@ -10,6 +10,8 @@ use App\Product;
 use App\OrderProduct;
 use Redirect;
 use App\User;
+use Stripe\Error\Card;
+use Stripe\Stripe;
 
 class OrderController extends Controller
 {
@@ -66,17 +68,16 @@ class OrderController extends Controller
      */
     public function employeeStore(Request $request)
     {
-        $this->validate($request, [
-            'user' => 'required',
-            'payment' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'user' => 'required',
+        //     'payment' => 'required',
+        // ]);
 
         $order = new Order;
         $order->user_id = $request->user;
         $order->status_id = 2; //make status pending
         $order->dateOrdered = \Carbon\Carbon::now();
-        $order->address = 'xxxAddress'; // temporary
-        $order->payment = $request->payment;
+        $order->address = 'In store purchase'; // temporary
         // $order->transaction_total = '10.00'; // temporary
         $order->save();
 
@@ -96,15 +97,33 @@ class OrderController extends Controller
 
         $sum = 0;
         foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);
         }
 
         $order = Order::find($order->id);
         $order->transaction_total = $sum;
         $order->save();
 
+        Stripe::setApiKey(env('STRIPE_TEST_KEY'));
+
+        // Get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // Create the charge on Stripe's servers - this will charge the user's card
+        $stripeAmount = bcmul($order->transaction_total, 100);
+        try {
+            $charge = \Stripe\Charge::create(array(
+                "amount" => $stripeAmount, // amount in cents, again
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Sweet Sweet Chocolates"
+            ));
+        } catch(Card $e) {
+            return "We're sorry your credit card has been declined.";
+        }
+
         $request->session()->flash('status', 'Order has been submitted');
-        
+
         return Redirect::action('OrderController@create');
     }
 
@@ -123,7 +142,7 @@ class OrderController extends Controller
         $orderProduct->save();
 
         return $orderProduct;
-        
+
         // return view('products.index', ['products' => $products]);
     }
 
@@ -140,7 +159,7 @@ class OrderController extends Controller
 
         $sum = 0;
         foreach($items as $item) {
-            $sum+= number_format($item->pivot->quantity * $item->price, 2);    
+            $sum+= number_format($item->pivot->quantity * $item->price, 2);
         }
 
         return view('orders.show', ['order' => $order, 'items'=>$items, 'sum'=>$sum]);

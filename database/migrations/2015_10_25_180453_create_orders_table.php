@@ -18,7 +18,6 @@ class CreateOrdersTable extends Migration
             $table->integer('status_id');
             $table->date('dateOrdered');
             $table->string('address');
-            $table->string('payment');
             $table->date('dateCompleted')->nullable();
             $table->decimal('transaction_total');
             $table->timestamps();

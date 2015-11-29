@@ -4,7 +4,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Current cart items 
+            Current cart items
             @if(!empty($cartItems))
                 <span class="pull-right badge">{{ $cartItems }}</span>
             @endif
@@ -42,8 +42,8 @@
         </table>
     </div>
 
-    <a class="btn btn-primary btn-lg pull-right" href="{{ route('cart.checkout') }}">Checkout <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span><span class="sr-only">Remove item</span></a> 
-    
+    <a class="btn btn-primary btn-lg pull-right" href="{{ route('cart.checkout') }}">Checkout <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span><span class="sr-only">Remove item</span></a>
+
 @endsection
 
 @section('sidebar')

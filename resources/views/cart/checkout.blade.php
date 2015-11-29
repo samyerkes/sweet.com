@@ -99,25 +99,8 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             Payment method
-            <div id="paymentmethod" class="btn-group pull-right" data-toggle="buttons">
-                <label id="ccsaved" class="btn btn-default btn-xs active">
-                    <input type="radio" id="ccsaved" name="ccsaved" value="ccsaved" />Use a saved credit card
-                </label>
-                <label id="ccnosaved" class="btn btn-default btn-xs notactive">
-                    <input type="radio" name="ccnosaved" value="ccnosaved" />Use a new credit card
-                </label>
-            </div>
         </div>
         <div class="panel-body">
-
-            {{-- <div id="ccsaved" class="form-group">
-                {!! Form::label('payment', 'Saved payment methods'); !!}
-                <select name="payment" class="form-control">
-                    @foreach ($creditcards as $cc)
-                        <option value="{{ $cc->number }}">{{ $cc->name }} - {{ $cc->number }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
 
             <div class="row">
               <div class="form-group col-md-6 col-sm-6 col-xs-6">
@@ -199,18 +182,6 @@
             $('#shippingmethod > #addrsaved-btn').on('click', function() {
                 $('.panel-body > #addrnosaved').hide();
                 $('.panel-body > #addrsaved').show();
-            });
-            $('#paymentmethod > #ccnosaved').on('click', function() {
-                $('.panel-body #ccsaved').hide();
-                $('.panel-body #ccnosaved').show();
-                $('.panel-body #ccsaved input.form-control').attr('name', 'foo');
-                $('.panel-body #ccnosaved input.form-control').attr('name', 'payment');
-            });
-            $('#paymentmethod > #ccsaved').on('click', function() {
-                $('.panel-body #ccsaved').show();
-                $('.panel-body #ccnosaved').hide();
-                $('.panel-body #ccnoccsaved input.form-control').attr('name', 'foo');
-                $('.panel-body #ccsaved input.form-control').attr('name', 'payment');
             });
         });
     </script>
