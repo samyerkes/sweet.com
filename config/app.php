@@ -146,10 +146,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         'Collective\Html\HtmlServiceProvider',
-
+        'Spatie\Activitylog\ActivitylogServiceProvider',
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+
 
     ],
 
@@ -201,7 +202,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-
+        'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
 

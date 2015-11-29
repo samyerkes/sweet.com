@@ -16,6 +16,7 @@ use App\Address;
 use Mail;
 use Stripe\Error\Card;
 use Stripe\Stripe;
+use Activity;
 
 class CartController extends Controller
 {
@@ -73,9 +74,8 @@ class CartController extends Controller
         }
 
         $addresses = $user->address()->get();
-        $creditcards = $user->creditcard()->get();
 
-        return view('cart.checkout', ['items'=>$items, 'sum'=>$sum, 'user'=>$user, 'addresses'=>$addresses, 'order'=>$order, 'creditcards'=>$creditcards]);
+        return view('cart.checkout', ['items'=>$items, 'sum'=>$sum, 'user'=>$user, 'addresses'=>$addresses, 'order'=>$order]);
     }
 
     /**
@@ -117,7 +117,6 @@ class CartController extends Controller
         $order->transaction_total = $request->total;
         $order->dateOrdered = $now;
         $order->status_id = 2;
-        $order->payment = $request->payment;
         $order->save();
 
         $user = Auth::User();
@@ -145,6 +144,8 @@ class CartController extends Controller
             $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
             $m->to($user->email, $user->fname.' '.$user->lname)->subject('Thank you for your order!');
         });
+
+        Activity::log('Submitted an order.', $user->id);
 
         $request->session()->flash('status', 'Your order has been submitted!');
 
@@ -207,6 +208,8 @@ class CartController extends Controller
             }
         }
 
+        Activity::log('Saved an item to their cart.', $user->id);
+
         $request->session()->flash('status', 'Product was saved to cart.');
 
         return Redirect::action('CartController@index');
@@ -257,6 +260,7 @@ class CartController extends Controller
     {
 
         $item = OrderProduct::find($id);
+        Activity::log('Deleted an item from their cart.');
         $item->delete();
         return Redirect::action('CartController@index')->with('status', 'Item was successfully removed.');;
     }

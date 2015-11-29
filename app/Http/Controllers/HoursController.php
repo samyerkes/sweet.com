@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Hour;
 use Redirect;
+use Activity;
 
 class HoursController extends Controller
 {
@@ -89,6 +90,8 @@ class HoursController extends Controller
         $hour = Hour::find($id);
         $hour->hours = $request->hours;
         $hour->save();
+
+        Activity::log('Updated store hours for ' . $hour->day . '.');
 
         $request->session()->flash('status', 'Store hours were successfully updated.');
 

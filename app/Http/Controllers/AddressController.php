@@ -9,6 +9,7 @@ use App\User;
 use App\Address;
 use Auth;
 use Redirect;
+use Activity;
 
 class AddressController extends Controller
 {
@@ -53,6 +54,8 @@ class AddressController extends Controller
         $address->zip = $request->zip;
         $address->save();
 
+        Activity::log('Added a new address.');
+
         $request->session()->flash('status', 'Address information was successfully saved.');
 
         return Redirect::action('AddressController@index');
@@ -66,7 +69,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -100,6 +103,8 @@ class AddressController extends Controller
         $address->zip = $request->zip;
         $address->save();
 
+        Activity::log('Updated an address.');
+
         $request->session()->flash('status', 'Address information was successfully updated.');
 
         return Redirect::action('AddressController@index');
@@ -114,6 +119,7 @@ class AddressController extends Controller
     public function destroy($id)
     {
         $address = Address::find($id);
+        Activity::log('Deleted an address.');
         $address->delete();
         return Redirect::action('AddressController@index')->with('status', 'Address information was successfully updated.');
     }

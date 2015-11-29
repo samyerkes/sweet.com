@@ -11,6 +11,7 @@ use App\UserShift;
 use DB;
 use Redirect;
 use Carbon\Carbon;
+use Activity;
 
 class ScheduleController extends Controller
 {
@@ -27,7 +28,7 @@ class ScheduleController extends Controller
         // $users = Shift::find($shift->id)->users()->get();
 
         return view('shifts.index', ['shift' => $shift]);
-        
+
     }
 
     /**
@@ -55,6 +56,8 @@ class ScheduleController extends Controller
         $shift->start_time = $request->start_time;
         $shift->end_time = $request->end_time;
         $shift->save();
+
+        Activity::log('Added ' . $shift->users->fname . ' ' . $shift->users->lname . 'to the shift.');
 
         $request->session()->flash('status', 'Employee was successfully saved.');
 
@@ -101,6 +104,8 @@ class ScheduleController extends Controller
         $shift->end_time = $request->end_time;
         $shift->save();
 
+        Activity::log('Added an employee to a shift.');
+
         $request->session()->flash('status', 'Employee was successfully saved.');
 
         return Redirect::action('ScheduleController@index');
@@ -115,6 +120,7 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         $shift = UserShift::find($id);
+        Activity::log('Removed an employee from a shift.');
         $shift->delete();
         return Redirect::action('ScheduleController@index')->with('status', 'Employee shift was successfully updated.');
     }

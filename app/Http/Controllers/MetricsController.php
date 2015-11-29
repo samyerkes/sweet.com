@@ -14,6 +14,7 @@ use Response;
 use DateTime;
 use DateInterval;
 use DatePeriod;
+use Spatie\Activitylog\Models\Activity;
 
 class MetricsController extends Controller
 {
@@ -83,12 +84,37 @@ class MetricsController extends Controller
      */
     public function users()
     {
-        $measure = DB::table('users')
-             ->select(DB::raw('COUNT(id) as userCount, created_at'))
-             ->groupBy('created_at')
-             ->get();
+        // $measure = DB::table('users')
+        //      ->select(DB::raw('COUNT(id) as userCount, created_at'))
+        //      ->groupBy('created_at')
+        //      ->get();
+
+        $days = User::select(DB::raw('DATE(created_at) as datum'))
+           ->distinct()
+           ->orderBy('datum','asc')
+           ->get();
+
+        $measure = array();
+        foreach($days as $day) {
+          $count = User::where(DB::raw('DATE(created_at)'),'=',$day->datum)
+                    ->orderBy('id','asc')
+                    ->count();
+
+          $measure[$day->datum] = $count;
+        }
 
         return view('metrics.users', ['measure' => $measure]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activity()
+    {
+        $latestActivities = Activity::with('user')->latest()->limit(100)->get();
+        return view('metrics.activity', ['latestActivities' => $latestActivities]);
     }
 
     /**

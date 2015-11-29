@@ -87,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/admin/metrics/inventory', ['as'=>'admin.metrics.inventory', 'uses' => 'MetricsController@inventory']);
 		Route::get('/admin/metrics/supply', ['as'=>'admin.metrics.supply', 'uses' => 'MetricsController@supply']);
 		Route::get('/admin/metrics/users', ['as'=>'admin.metrics.users', 'uses' => 'MetricsController@users']);
+    Route::get('/admin/activity', ['as'=>'admin.activity', 'uses' => 'MetricsController@activity']);
+
 
 		Route::get('/admin/products/low', ['as' => 'admin.products.low', 'uses' => 'ProductController@lowInventory']);
 		Route::resource('admin/products', 'ProductController');

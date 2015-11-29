@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Mail;
+use Activity;
 
 class AuthController extends Controller
 {
@@ -65,12 +66,16 @@ class AuthController extends Controller
             $m->to($data['email'], $data['fname'])->subject('Thanks for joining Sweet Sweet Chocolates');
         });
 
-        return User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'email' => $data['email'],
             'role_id' => 3,
             'password' => bcrypt($data['password']),
         ]);
+
+        Activity::log('Registered an account', $user->id);
+
+        return $user;
     }
 }

@@ -10,6 +10,7 @@ use App\Recipe;
 use App\Product;
 use App\Supplier;
 use Redirect;
+use Activity;
 
 class IngredientController extends Controller
 {
@@ -50,6 +51,11 @@ class IngredientController extends Controller
         $recipe->quantity = $request->Quantity;
         $recipe->save();
 
+        $product = Product::find($recipe->product_id);
+        $ingredient = Ingredient::find($recipe->ingredient_id);
+
+        Activity::log('Added ' . $ingredient->name . ' to the ' . $product->name . ' recipe.');
+
         return Redirect::action('RecipeController@show', $request->product_id);
     }
 
@@ -78,6 +84,8 @@ class IngredientController extends Controller
         $ingredient->quantity = $request->Quantity;
         $ingredient->unit = $request->Unit;
         $ingredient->save();
+
+        Activity::log('Add a new ingredient, ' . $ingredient->name . ', to the system.');
 
         $request->session()->flash('status', 'Ingredient information was successfully saved.');
 
@@ -125,6 +133,8 @@ class IngredientController extends Controller
         $ingredient->unit = $request->Unit;
         $ingredient->save();
 
+        Activity::log('Updated the ' . $ingredient->name . ' ingredient\'s details.');
+
         $request->session()->flash('status', 'Ingredient information was successfully updated.');
 
         return Redirect::action('IngredientController@index');
@@ -139,6 +149,7 @@ class IngredientController extends Controller
     public function destroy($id)
     {
         $ingredient = Ingredient::find($id);
+        Activity::log('Deleted the ' . $ingredient->name . ' ingredient from the system');
         $ingredient->delete();
         return Redirect::back()->with('status','Ingredient removed!');
     }

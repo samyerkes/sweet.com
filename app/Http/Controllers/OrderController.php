@@ -12,6 +12,7 @@ use Redirect;
 use App\User;
 use Stripe\Error\Card;
 use Stripe\Stripe;
+use Activity;
 
 class OrderController extends Controller
 {
@@ -122,6 +123,8 @@ class OrderController extends Controller
             return "We're sorry your credit card has been declined.";
         }
 
+        Activity::log('Created an in store order for ' . $order->user->fname . ' ' . $order->user->lname);
+
         $request->session()->flash('status', 'Order has been submitted');
 
         return Redirect::action('OrderController@create');
@@ -189,6 +192,8 @@ class OrderController extends Controller
         $orderProduct->status_id = 3;
         $orderProduct->dateCompleted = \Carbon\Carbon::now();
         $orderProduct->save();
+
+        Activity::log('Fulfilled an order for ' . $orderProduct->user->fname . ' ' . $orderProduct->user->lname);
 
         $request->session()->flash('status', 'Order has been marked as completed!');
 

@@ -9,6 +9,7 @@ use App\Ingredient;
 use App\Product;
 use App\Recipe;
 use Redirect;
+use Activity;
 
 class RecipeController extends Controller
 {
@@ -96,6 +97,8 @@ class RecipeController extends Controller
         $product->recipe = $request->Description;
         $product->save();
 
+        Activity::log('Edited the ' . $product->name . ' recipe.');
+
         $request->session()->flash('status', 'Product recipe was successfully updated.');
 
         return Redirect::action('RecipeController@show', $product->id);
@@ -110,6 +113,7 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
+        Activity::log('Deleted an ingredient from the recipe.');
         $recipe->delete();
         return Redirect::back()->with('status','Ingredient removed!');
     }

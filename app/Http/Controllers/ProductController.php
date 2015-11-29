@@ -11,6 +11,7 @@ use Storage;
 use DB;
 use App\Category;
 use Redirect;
+use Activity;
 
 class ProductController extends Controller
 {
@@ -116,6 +117,8 @@ class ProductController extends Controller
             base_path() . '/public/uploads/images/products/', $imageName
         );
 
+        Activity::log('Added a new product, ' . $product->name);
+
         $request->session()->flash('status', 'Product was added.');
 
         $products = Product::all();
@@ -188,6 +191,8 @@ class ProductController extends Controller
                 base_path() . '/public/uploads/images/products/', $imageName
             );
         }
+
+        Activity::log('Edited the ' . $product->name . ' product details.');
 
         $request->session()->flash('status', 'Product was successfully updated.');
 

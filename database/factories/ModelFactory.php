@@ -18,6 +18,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'role_id' => '3',
         'password' => bcrypt(str_random(10)),
+        'created_at' => $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now'),
         'remember_token' => str_random(10),
     ];
 });

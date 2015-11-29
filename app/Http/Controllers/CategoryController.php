@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Category;
 use Redirect;
+use Activity;
 
 class CategoryController extends Controller
 {
@@ -39,9 +40,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $address = new Category;
-        $address->name = $request->name;
-        $address->save();
+        $category = new Category;
+        $category->name = $request->name;
+        $category->save();
+
+        Activity::log('Created the ' . $category->name . ' product category');
 
         $request->session()->flash('status', 'Product category was successfully saved.');
 
@@ -85,6 +88,8 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
+        Activity::log('Updated ' . $category->name . ' product category');
+
         $request->session()->flash('status', 'Product category was successfully updated.');
 
         return Redirect::action('CategoryController@index');
@@ -99,7 +104,11 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
+        Activity::log('Deleted the ' . $category->name . ' product category');
+
         $category->delete();
+
         return Redirect::action('CategoryController@index')->with('status', 'Product category was successfully updated.');
     }
 }

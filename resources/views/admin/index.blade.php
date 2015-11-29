@@ -16,7 +16,7 @@
                 </ul>
             </div>
 
-            
+
                 <div class="panel panel-default">
                     <div class="panel-heading">Products</div>
                     <ul class="list-group">
@@ -29,7 +29,7 @@
                             <li class="list-group-item"><a href="{{ route('admin.recipe.index') }}">View recipes</a></li>
                     </ul>
                 </div>
-            
+
             @if ($currentUser->role->id == 1)
                 <div class="panel panel-default">
                     <div class="panel-heading">Supplies</div>
@@ -41,9 +41,9 @@
                 </div>
             @endif
         </div>
-        
-        
-        
+
+
+
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Users</div>
@@ -63,7 +63,7 @@
                     </ul>
                 </div>
             @endif
-        
+
             <div class="panel panel-default">
                 <div class="panel-heading">Production</div>
                 <ul class="list-group">
@@ -75,6 +75,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Reports</div>
                     <ul class="list-group">
+                        <li class="list-group-item"><a href="{{ route('admin.activity') }}">System activity log</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.users') }}">User metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.orders') }}">Transaction metrics</a></li>
                         <li class="list-group-item"><a href="{{ route('admin.metrics.inventory') }}">Product inventory</a></li>
@@ -83,7 +84,7 @@
                 </div>
             @endif
             </div>
-        
+
 
     </div>
 

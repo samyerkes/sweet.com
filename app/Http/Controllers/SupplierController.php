@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Supplier;
 use Redirect;
+use Activity;
 
 class SupplierController extends Controller
 {
@@ -45,6 +46,8 @@ class SupplierController extends Controller
         $supplier->phone = $request->Phone;
         $supplier->address = $request->Address;
         $supplier->save();
+
+        Activity::log('Created a new supplier, ' . $supplier->name );
 
         $request->session()->flash('status', 'Supplier information was successfully saved.');
 
@@ -92,6 +95,8 @@ class SupplierController extends Controller
         $supplier->address = $request->Address;
         $supplier->save();
 
+        Activity::log('Updated the ' . $supplier->name . ' supplier contact information.');
+
         $request->session()->flash('status', 'Supplier information was successfully updated.');
 
         return Redirect::action('SupplierController@index');
@@ -106,6 +111,7 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         $supplier = Supplier::find($id);
+        Activity::log('Deleted the ' . $supplier->name . ' from the system.');
         $supplier->delete();
         return Redirect::back()->with('status','Supplier removed!');
     }

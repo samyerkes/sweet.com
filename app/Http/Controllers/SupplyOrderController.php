@@ -11,6 +11,7 @@ use App\Ingredient;
 use App\IngredientSupplyOrder;
 use Redirect;
 use Mail;
+use Activity;
 
 class SupplyOrderController extends Controller
 {
@@ -36,6 +37,7 @@ class SupplyOrderController extends Controller
         $supplyorder->supplier_id =1;
         $supplyorder->status_id =1;
         $supplyorder->save();
+        Activity::log('Created supply order #' . $supplyorder->id . '.');
         return Redirect::action('SupplyOrderController@show', $supplyorder->id);
     }
 
@@ -52,6 +54,10 @@ class SupplyOrderController extends Controller
         $ingredientsupplyorder->ingredient_id = $request->Ingredient;
         $ingredientsupplyorder->quantity = $request->Quantity;
         $ingredientsupplyorder->save();
+
+        $ingredient = Ingredient::find($ingredientsupplyorder->ingredient_id);
+
+        Activity::log('Added ' . $ingredient->name . ' to the supply order.');
 
         return Redirect::back()->with('status','Supply order updated!');
     }
@@ -116,6 +122,8 @@ class SupplyOrderController extends Controller
                 $m->from('samuelyerkes@gmail.com', 'Sweet Sweet Chocolates');
                 $m->to($supplyorder->supplier->email, $supplyorder->supplier->name)->subject('Sweet Sweet Chocolates would like to make a supply order');
             });
+
+            Activity::log('Submitted a supply order to ' . $supplyorder->supplier->name);
         }
         return Redirect::action('SupplyOrderController@index');
     }
@@ -129,6 +137,7 @@ class SupplyOrderController extends Controller
     public function destroy($id)
     {
         $ingredient = IngredientSupplyOrder::find($id);
+        Activity::log('Removed an ingredient from a supply order.');
         $ingredient->delete();
         return Redirect::back()->with('status','Supply order updated!');
     }

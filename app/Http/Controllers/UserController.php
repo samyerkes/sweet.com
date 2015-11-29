@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 use Redirect;
 use Hash;
+use Activity;
 
 class UserController extends Controller
 {
@@ -48,6 +49,8 @@ class UserController extends Controller
         $user->role_id = $request->role;
         $user->password = Hash::make('sweetsweetchocolate');
         $user->save();
+
+        Activity::log('Added a new customer, ' . $user->fname . ' ' . $user->lname);
 
         $request->session()->flash('status', 'User was successfully created.');
 
@@ -93,6 +96,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role_id = $request->role;
         $user->save();
+
+        Activity::log('Updated customer information for ' . $user->fname . ' ' . $user->lname);
 
         $request->session()->flash('status', 'User information was successfully updated.');
 

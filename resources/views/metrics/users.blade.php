@@ -16,7 +16,7 @@
 @endsection
 
 @section('content')
-	
+
 	{!! Breadcrumbs::render('admin.metrics.users') !!}
 
 	<div class="panel panel-default">
@@ -37,13 +37,13 @@
 	<script>
 		new Chartist.Line('#chart1', {
 	    labels: [
-				@foreach($measure as $m)
-					'{{ $m->created_at }}',
+				@foreach($measure as $key => $m)
+					'{{ $key }}',
 				@endforeach
 			],
 	    series: [[
-					@foreach($measure as $m)
-						'{{ $m->userCount }}',
+					@foreach($measure as $key => $m)
+						'{{ $m }}',
 					@endforeach
 				]]
 		}, {

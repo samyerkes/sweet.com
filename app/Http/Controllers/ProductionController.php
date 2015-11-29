@@ -10,6 +10,7 @@ use App\Product;
 use App\Status;
 use Redirect;
 use App\Ingredient;
+use Activity;
 
 class ProductionController extends Controller
 {
@@ -54,7 +55,7 @@ class ProductionController extends Controller
             $enoughMaterials = ($i->quantity - $eachIngredient);
             if ($enoughMaterials < 0) {
                 return Redirect::back()->with('danger', 'Sorry, we do not have enough '. $ingredient->name . ' to make this!');
-            }            
+            }
         }
 
         //if the check is successful then schedule the batch
@@ -64,6 +65,8 @@ class ProductionController extends Controller
         $productionSchedule->proddate = $request->Date;
         $productionSchedule->status_id = 1;
         $productionSchedule->save();
+
+        Activity::log('Created a new production schedule of ' . $productionSchedule->product->name . '.');
 
         $request->session()->flash('status', 'Production schedule was successfully saved.');
 
@@ -128,8 +131,12 @@ class ProductionController extends Controller
                 $ingredient->save();
             }
 
+            Activity::log('Completed '. $productionSchedule->batches . ' batches of ' . $productionSchedule->product->name . '.');
+
+        } else {
+          Activity::log('Updated production schedule #'. $productionSchedule->id . '.');
         }
-        
+
         $request->session()->flash('status', 'Production schedule was successfully updated.');
 
         return Redirect::action('ProductionController@index');
@@ -144,6 +151,7 @@ class ProductionController extends Controller
     public function destroy($id)
     {
         $productionSchedule = Batch::find($id);
+        Activity::log('Cancelled production schedule #'. $productionSchedule->id . '.');
         $productionSchedule->delete();
         return Redirect::action('ProductionController@index')->with('status', 'Production schedule was successfully updated.');
     }

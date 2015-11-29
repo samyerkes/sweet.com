@@ -11,6 +11,7 @@ use App\Status;
 use App\Address;
 use Auth;
 use Redirect;
+use Activity;
 
 class ProfileController extends Controller
 {
@@ -107,9 +108,11 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->save();
 
+        Activity::log('Updated their profile information.', $user->id);
+
         $request->session()->flash('status', 'Profile information was successfully updated.');
 
-        return view('profile.index', ['user' => $user]);
+        return Redirect::action('ProfileController@index');
     }
 
     /**

@@ -237,6 +237,12 @@ Breadcrumbs::register('admin.metrics.inventory', function($breadcrumbs)
     $breadcrumbs->push('Inventory reports', route('admin.metrics.inventory'));
 });
 
+Breadcrumbs::register('admin.activity', function($breadcrumbs)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('Activity log', route('admin.activity'));
+});
+
 Breadcrumbs::register('admin.metrics.supply', function($breadcrumbs)
 {
     $breadcrumbs->push('Admin dashboard', route('admin'));

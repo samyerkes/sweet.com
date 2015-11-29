@@ -76,4 +76,12 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('App\Shift', 'user_shifts', 'shift_id', 'user_id')->withPivot('start_time', 'end_time');
     }
+
+    /**
+     * Get the activites for the user.
+     */
+    public function activity()
+    {
+        return $this->hasMany('App\Activity');
+    }
 }
