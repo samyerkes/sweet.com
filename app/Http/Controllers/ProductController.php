@@ -137,14 +137,7 @@ class ProductController extends Controller
         $today = \Carbon\Carbon::today();
         $weekAgo = \Carbon\Carbon::now()->subDays(7);
 
-        $orders = Order::whereBetween('created_at', [$weekAgo, $today])
-            ->whereHas('product', function ($query) use ($id){
-                $query->where('products.id', '=', $id);
-            })->get();
-
-        // return $orders;
-
-
+        $orders = Product::find($id)->order()->where('dateOrdered', '>', $weekAgo)->get();
 
         $product = Product::find($id);
         return view('products.show', ['product' => $product, 'orders'=>$orders]);
