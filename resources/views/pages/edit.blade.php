@@ -21,11 +21,6 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::label('order', 'Order'); !!}
-			{!! Form::number('order', $page->order, array('class' => 'form-control', 'placeholder'=>$page->order)); !!}
-		</div>
-
-		<div class="form-group">
 			{!! Form::label('Description', 'Content'); !!}
 			@include('partials.quill-open')
 				{!! $page->content !!}

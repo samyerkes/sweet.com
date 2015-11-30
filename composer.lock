@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "163936053c16b094855a4b20c1122724",
-    "content-hash": "aacf4b95709f47a722c2b0f41bae38df",
+    "hash": "dac803cd603755abe792ead2144a59d9",
+    "content-hash": "9cc6f1f250f153de2cedae63d10d8c40",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1154,6 +1154,59 @@
                 "shell"
             ],
             "time": "2015-11-12 16:18:56"
+        },
+        {
+            "name": "rutorika/sortable",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boxfrommars/rutorika-sortable.git",
+                "reference": "418f0fd430ef207a5aa4e17e1c671a02a5bca1ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boxfrommars/rutorika-sortable/zipball/418f0fd430ef207a5aa4e17e1c671a02a5bca1ca",
+                "reference": "418f0fd430ef207a5aa4e17e1c671a02a5bca1ca",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rutorika\\Sortable": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Groza",
+                    "email": "boxfrommars@gmail.com"
+                }
+            ],
+            "description": "Adds sortable behavior and ordering to Laravel Eloquent models. Grouping and many to many supported.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "laravel4",
+                "laravel5",
+                "order",
+                "orderable",
+                "ordering",
+                "sort",
+                "sortable",
+                "sorting"
+            ],
+            "time": "2015-11-26 18:51:27"
         },
         {
             "name": "spatie/activitylog",

@@ -19,7 +19,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-      $pages = Page::all();
+      $pages = Page::sorted()->get();
       return view('pages.index',['pages'=>$pages]);
     }
 
@@ -44,7 +44,6 @@ class PagesController extends Controller
       $page = new Page;
       $page->name = $request->name;
       $page->slug = $request->slug;
-      $page->order = $request->order;
       $page->content = $request->Description;
       $page->save();
 
@@ -93,7 +92,7 @@ class PagesController extends Controller
       $page = Page::find($id);
       $page->name = $request->name;
       $page->slug = $request->slug;
-      $page->order = $request->order;
+      $page->position = $request->order;
       $page->content = $request->Description;
       $page->save();
 

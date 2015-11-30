@@ -147,6 +147,7 @@ return [
 
         'Collective\Html\HtmlServiceProvider',
         'Spatie\Activitylog\ActivitylogServiceProvider',
+        'Rutorika\Sortable\SortableServiceProvider',
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,

@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('styles')
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+@endsection
+
 @section('content')
 
     {!! Breadcrumbs::render('admin.pages.index') !!}
@@ -10,16 +14,19 @@
         </div>
         <table class="table table-striped">
             <thead>
+                <th></th>
                 <th>Name</th>
                 <th>Order</th>
                 <th>Slug</th>
                 <th></th>
                 <th></th>
             </thead>
+            <tbody class="sortable" data-entityname="pages">
             @foreach($pages as $p)
-                <tr>
+                <tr data-itemId="{{{ $p->id }}}">
+                    <td class="sortable-handle"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></td>
                     <td><a href="/{{ $p->slug }}">{{ $p->name }}</a></td>
-                    <td>{{ $p->order }}</td>
+                    <td>{{ $p->position }}</td>
                     <td>/{{ $p->slug }}</td>
                     <td><a href="{{ route('admin.pages.edit', array('id' => $p->id)) }}" class="btn btn-warning pull-right btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </a></td>
                     <td><button type="button" class="btn btn-danger pull-right btn-xs" data-toggle="modal" data-target="#modal{{$p->id}}">Remove</button>
@@ -43,9 +50,14 @@
                     </td>
                 </tr>
             @endforeach
+          </tbody>
         </table>
     </div>
+@endsection
 
+@section('scripts')
+  <script src='//code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
+  <script src="../../js/sort.js"></script>
 @endsection
 
 @section('sidebar')

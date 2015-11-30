@@ -105,3 +105,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('{pageSlug}', [
     'as' => 'page.show', 'uses' => 'PagesController@show'
 ]);
+
+Route::post('sort', '\Rutorika\Sortable\SortableController@sort'); 

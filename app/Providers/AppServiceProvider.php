@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Guard $auth)
     {
         view()->composer('*', function($view){
-          $pages = Page::orderBy('order', 'asc')->get();
+          $pages = Page::orderBy('position', 'asc')->get();
           $view->with('pages', $pages);
         });
 
