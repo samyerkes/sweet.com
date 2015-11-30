@@ -31,19 +31,24 @@ class MetricsController extends Controller
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
 
+        // $orderCount = [];
+        // foreach ($period as $p ){
+        //   $dt = $p->format( "Y-m-d" );
+        //   $oc = Order::where('dateOrdered', $dt)->where('status_id', '>', 1)->count();
+        //   $orderCount[] = $oc;
+        // };
+
         $orderCount = [];
-        foreach ($period as $p ){
-          $dt = $p->format( "Y-m-d" );
-          $oc = Order::where('dateOrdered', $dt)->where('status_id', '>', 1)->count();
+        for($i=7; $i>=0; $i--){
+          $oc = Order::where('dateOrdered', \Carbon\Carbon::now()->subDays($i)->format('Y-m-d'))->count();
           $orderCount[] = $oc;
-        };
+        }
 
         $sumTransactions = [];
-        foreach ($period as $p ){
-          $dt = $p->format( "Y-m-d" );
-          $daySum = Order::where('dateOrdered', $dt)->where('status_id', '>', 1)->sum('transaction_total');
-          $sumTransactions[] = $daySum ;
-        };
+        for($i=7; $i>=0; $i--){
+          $sum = Order::where('dateOrdered', \Carbon\Carbon::now()->subDays($i)->format('Y-m-d'))->sum('transaction_total');
+          $sumTransactions[] = $sum;
+        }
 
         $dates = [];
         foreach ($period as $p ){

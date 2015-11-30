@@ -19,7 +19,7 @@
 					<td>{{ $activity->user->fname}} {{ $activity->user->lname}}</td>
 					<td>{{ $activity->text}}</td>
 					<td>{{ $activity->ip_address}}</td>
-					<td>{{ $activity->created_at}}</td>
+					<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $activity->created_at)->diffForHumans() }}</td>
 				</tr>
 				@endforeach
 			</tbody>
