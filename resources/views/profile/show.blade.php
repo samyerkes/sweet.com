@@ -3,7 +3,7 @@
 @section('content')
 
 	{!! Breadcrumbs::render('profile.show', $currentUser, $order) !!}
-	
+
 	@if ($order->status->id == 2)
 		<div class="progress">
 			<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
@@ -17,13 +17,13 @@
 			</div>
 		</div>
 	@endif
-	
+
 
 	@if ($order->status->id == 2)
 		<div class="panel panel-warning">
 	@elseif ($order->status->id == 3)
 		<div class="panel panel-success">
-	@else 
+	@else
 		<div class="panel panel-default">
 	@endif
 		<div class="panel-heading">
@@ -31,7 +31,6 @@
 		</div>
 		<div class="panel-body">
 			<strong>Address:</strong> {{ $order->address }}<br />
-			<strong>Payment number:</strong> {{ $order->payment }}<br />
 			<strong>Order Date:</strong> {{ $order->dateOrdered }}<br />
 	    </div>
 	</div>
@@ -69,7 +68,7 @@
 	@if($order->status_id == 1)
 		<a class="btn btn-primary btn-lg">Checkout</a>
 	@endif
-	
+
 @endsection
 
 @section('sidebar')
