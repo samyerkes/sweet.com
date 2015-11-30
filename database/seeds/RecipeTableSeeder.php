@@ -14,12 +14,12 @@ class RecipeTableSeeder extends Seeder
         DB::table('recipes')->insert([
             'ingredient_id' => 1,
             'product_id' => 1,
-            'quantity' => 25,
+            'quantity' => 100,
         ]);
         DB::table('recipes')->insert([
             'ingredient_id' => 2,
             'product_id' => 1,
-            'quantity' => 50,
+            'quantity' => 200,
         ]);
     }
 }
