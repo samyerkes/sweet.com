@@ -8,7 +8,7 @@
 		<div class="panel panel-warning">
 	@elseif ($order->status->id == 3)
 		<div class="panel panel-success">
-	@else 
+	@else
 		<div class="panel panel-default">
 	@endif
 		<div class="panel-heading">
@@ -22,7 +22,6 @@
 				{{ $order->user->fname }} {{ $order->user->lname }}<br />
 			@endif
 			<strong>Address:</strong> {{ $order->address }}<br />
-			<strong>Payment number:</strong> {{ $order->payment }}<br />
 			<strong>Order Date:</strong> {{ $order->dateOrdered }}<br />
 	    </div>
 	</div>
@@ -62,7 +61,7 @@
             {!! Form::submit('Mark order as completed', array('class' => 'btn-success btn-lg btn pull-right' )) !!}
         {!! Form::close() !!}
 	@endif
-	
+
 @endsection
 
 @section('sidebar')
