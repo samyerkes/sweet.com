@@ -45,7 +45,7 @@ class ProductTableSeeder extends Seeder
             'position' => 3,
             'special' => false,
             'created_at' => '2015-03-08 04:11:02',
-            'category_id' => '3',
+            'category_id' => '2',
         ]);
         DB::table('products')->insert([
             'name' => 'SamSams',
@@ -57,7 +57,7 @@ class ProductTableSeeder extends Seeder
             'position' => 4,
             'special' => false,
             'created_at' => \Carbon\Carbon::now(),
-            'category_id' => '1',
+            'category_id' => '2',
         ]);
         DB::table('products')->insert([
             'name' => 'Kaylyn\'s Homemade Cookies',
