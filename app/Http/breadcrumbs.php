@@ -1,6 +1,26 @@
 <?php
 
 // Home
+Breadcrumbs::register('admin.pages.index', function($breadcrumbs)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('All pages', route('admin.pages.index'));
+});
+
+Breadcrumbs::register('admin.pages.create', function($breadcrumbs)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('All pages', route('admin.pages.index'));
+    $breadcrumbs->push('Create new page', route('admin.pages.create'));
+});
+
+Breadcrumbs::register('admin.pages.edit', function($breadcrumbs, $page)
+{
+    $breadcrumbs->push('Admin dashboard', route('admin'));
+    $breadcrumbs->push('All pages', route('admin.pages.index'));
+    $breadcrumbs->push('Edit page', route('admin.pages.edit', $page->id));
+});
+
 Breadcrumbs::register('admin.orders', function($breadcrumbs)
 {
     $breadcrumbs->push('Admin dashboard', route('admin'));

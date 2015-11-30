@@ -12,6 +12,7 @@ use App\Shift;
 use App\Product;
 use App\Category;
 use App\Batch;
+use App\Page;
 use Illuminate\Contracts\Auth\Guard;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Guard $auth)
     {
+        view()->composer('*', function($view){
+          $pages = Page::orderBy('order', 'asc')->get();
+          $view->with('pages', $pages);
+        });
+
         view()->composer('*', function($view){
           $view->with('currentUser', Auth::user());
         });

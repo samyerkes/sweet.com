@@ -30,7 +30,10 @@
     			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
     				<ul class="nav navbar-nav">
     					<li><a href="{{ route('product.listing') }}">Products</a></li>
-                        <li><a href="{{ route('hours.publicIndex') }}">Store Hours</a></li>
+              <li><a href="{{ route('hours.publicIndex') }}">Store Hours</a></li>
+              @foreach ($pages as $p)
+                <li><a href="/{{ $p->slug }}">{{ $p->name }}</a></li>
+              @endforeach
     					@if (Auth::check())
                             <li><a href="{{ route('profile.index') }}">Profile</a></li>
                             <li><a href="{{ route('auth.logout') }}">Logout</a></li>
@@ -39,7 +42,7 @@
     					@endif
     					<li>
                             <a href="{{ route('cart.index') }}">
-                                <span class="glyphicon glyphicon-shopping-cart hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Shopping Cart</span> 
+                                <span class="glyphicon glyphicon-shopping-cart hidden-xs" aria-hidden="true"></span> <span class="hidden-lg hidden-md hidden-sm">Shopping Cart</span>
                                 @if(!empty($cartItems))
                                     <span class="label label-default">{{ $cartItems }}</span>
                                 @endif
@@ -58,14 +61,14 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-md-8">
-                
+
                     @if (!empty(Session::get('status')))
                         <div class="alert alert-success">
-                            {{ Session::get('status') }}    
+                            {{ Session::get('status') }}
                         </div>
                     @elseif (!empty(Session::get('danger')))
                         <div class="alert alert-danger">
-                            {{ Session::get('danger') }}    
+                            {{ Session::get('danger') }}
                         </div>
                     @endif
 
@@ -88,6 +91,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         @yield('scripts')
-        
+
     </body>
 </html>

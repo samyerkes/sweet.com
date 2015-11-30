@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-		
+
 	<h1>Edit product recipe</h1>
 
 	{!! Breadcrumbs::render('admin.recipe.edit', $product) !!}
@@ -21,7 +21,7 @@
 		{!! Form::submit('Update', array('class'=>'btn btn-success')); !!}
 
 	{!! Form::close() !!}
-		
+
 @endsection
 
 @section('sidebar')

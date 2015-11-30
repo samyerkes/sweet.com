@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/admin/recipe/{product}/ingredient', ['as'=>'admin.recipe.ingredient.storeAdd', 'uses' => 'IngredientController@AddStore']);
 
 		Route::resource('/admin/category', 'CategoryController');
+    Route::resource('/admin/pages', 'PagesController');
 
 		Route::resource('/admin/hours', 'HoursController');
 
@@ -99,5 +100,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('admin/orders', ['as' => 'admin.orders.employeestore', 'uses' => 'OrderController@employeeStore']);
 
 	});
-
 });
+
+Route::get('{pageSlug}', [
+    'as' => 'page.show', 'uses' => 'PagesController@show'
+]);

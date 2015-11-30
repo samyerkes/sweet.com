@@ -60,6 +60,7 @@
                     <div class="panel-heading">Store</div>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{ route('admin.hours.index') }}">Hours</a></li>
+                        <li class="list-group-item"><a href="{{ route('admin.pages.index') }}">Pages</a></li>
                     </ul>
                 </div>
             @endif
