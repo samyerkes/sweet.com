@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('styles')
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+@endsection
+
 @section('content')
 
 	{!! Breadcrumbs::render('admin.products.index') !!}
@@ -10,14 +14,17 @@
 		</div>
 	    <table class="table table-striped">
 	    	<thead>
+					<th></th>
 	    		<th>ID</th>
 		    	<th>Name</th>
 		    	<th>Category</th>
 		    	<th>Price</th>
 		    	<th>Quantity</th>
 	    	</thead>
+				<tbody class="sortable" data-entityname="products">
 	    	@foreach ($products as $p)
-	    		<tr>
+	    		<tr data-itemId="{{{ $p->id }}}">
+						<td class="sortable-handle"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></td>
 	    			<td>
 							<a href="{{ route('admin.products.show', array('id' => $p->id)) }}">{{ $p->id }}</a>
 						</td>
@@ -35,6 +42,11 @@
 	    </table>
 	</div>
 
+@endsection
+
+@section('scripts')
+  <script src='//code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
+  <script src="../../js/sort.js"></script>
 @endsection
 
 @section('sidebar')

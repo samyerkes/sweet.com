@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
 	use SoftDeletes;
+	use \Rutorika\Sortable\SortableTrait;
 
     /**
      * The attributes that should be mutated to dates.

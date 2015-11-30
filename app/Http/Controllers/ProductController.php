@@ -23,11 +23,11 @@ class ProductController extends Controller
     public function publicListing($category = null)
     {
         if($category) {
-            $products = Product::where('category_id', $category)->get();
+            $products = Product::where('category_id', $category)->sorted()->get();
             $category = Category::find($category);
             $category = $category->name;
         } else {
-            $products = Product::all();
+            $products = Product::sorted()->get();
             $category = 'All products';
         }
 
@@ -53,7 +53,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::sorted()->get();
 
         return view('products.index', ['products' => $products]);
     }
