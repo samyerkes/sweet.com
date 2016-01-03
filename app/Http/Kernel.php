@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         'UserInfo' => \App\Http\Middleware\UserInfo::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'cors' => \App\Http\Middleware\Cors::class, // <<< add this line
     ];
 }

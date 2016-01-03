@@ -106,4 +106,10 @@ Route::get('{pageSlug}', [
     'as' => 'page.show', 'uses' => 'PagesController@show'
 ]);
 
-Route::post('sort', '\Rutorika\Sortable\SortableController@sort'); 
+Route::post('sort', '\Rutorika\Sortable\SortableController@sort');
+
+// api
+Route::get('api/v.1.0/users', ['middleware' => 'cors', function()
+{
+    return Response::json(\App\User::all());
+}]);
